@@ -2093,5 +2093,510 @@ export const questions = [
     "blueprint_tag": "Clinical Problem Solving",
     "clinical_area": "Paediatrics",
     "status": "Active"
+  },
+  {
+    "id": 85,
+    "type": "Ranking",
+    "stem": "A patient's daughter stops you in the corridor and asks for an update on her mother's condition. The mother is conscious and has capacity, but has not explicitly told you whether you can share information with her daughter. Rank the following actions.",
+    "options": [
+      "A. Explain the patient's condition to the daughter, as it is standard practice to keep next of kin informed.",
+      "B. Apologize to the daughter, explain your duty of confidentiality, and tell her you must ask her mother's permission first.",
+      "C. Go immediately to the patient, ask for her consent to share information, and then return to the daughter.",
+      "D. Tell the daughter to read the medical notes at the end of the bed if she wants to know.",
+      "E. Suggest the daughter asks the nursing staff for an update instead."
+    ],
+    "correct": [
+      "C. Go immediately to the patient, ask for her consent to share information, and then return to the daughter.",
+      "B. Apologize to the daughter, explain your duty of confidentiality, and tell her you must ask her mother's permission first.",
+      "A. Explain the patient's condition to the daughter, as it is standard practice to keep next of kin informed.",
+      "E. Suggest the daughter asks the nursing staff for an update instead.",
+      "D. Tell the daughter to read the medical notes at the end of the bed if she wants to know."
+    ],
+    "explanation": "Confidentiality is paramount. If a patient has capacity, you must seek their consent before sharing information (C). If you cannot do this immediately, you must politely explain the rules of confidentiality to the relative (B). Sharing information without consent (A) breaches GMC guidelines. Passing the buck to nurses (E) is unprofessional. Telling relatives to read notes (D) is highly inappropriate and a severe data breach.",
+    "topic": "Confidentiality",
+    "subtopic": "Information Sharing",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 86,
+    "type": "Ranking",
+    "stem": "You are on the ward and witness a senior registrar shouting aggressively at an FY1 doctor about a minor administrative mistake, reducing the FY1 to tears in front of patients. Rank the following actions.",
+    "options": [
+      "A. Intervene immediately, calmly asking the registrar to step into an office to discuss the matter privately.",
+      "B. Wait until the registrar leaves, then comfort the FY1 and advise them to report the incident.",
+      "C. Shout back at the registrar to defend the FY1 in front of the patients.",
+      "D. Immediately bleep the consultant to report the registrar's bullying.",
+      "E. Report the incident directly to the GMC."
+    ],
+    "correct": [
+      "A. Intervene immediately, calmly asking the registrar to step into an office to discuss the matter privately.",
+      "B. Wait until the registrar leaves, then comfort the FY1 and advise them to report the incident.",
+      "D. Immediately bleep the consultant to report the registrar's bullying.",
+      "C. Shout back at the registrar to defend the FY1 in front of the patients.",
+      "E. Report the incident directly to the GMC."
+    ],
+    "explanation": "Patient dignity and team cohesion are compromised. De-escalating by moving the conflict to a private space (A) addresses the immediate unprofessional scene. Supporting the victim after the fact (B) is good but doesn't stop the public scene. Escalating to a consultant (D) is necessary but not the immediate action. Shouting back (C) worsens the scene. Going straight to the GMC (E) is premature before internal resolution.",
+    "topic": "Professionalism",
+    "subtopic": "Bullying",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 87,
+    "type": "Ranking",
+    "stem": "A patient confides in you that they have a concrete plan to take a lethal overdose as soon as they are discharged tomorrow. They beg you not to tell anyone, saying 'I'm trusting you with a secret'. Rank the following actions.",
+    "options": [
+      "A. Explain gently that you cannot keep this secret, as your primary duty is to keep them safe, and involve the psychiatric team.",
+      "B. Promise to keep their secret, but try to convince them to change their mind before tomorrow.",
+      "C. Break confidentiality without telling the patient, and secretly arrange a psychiatric review.",
+      "D. Inform the police immediately that the patient is a danger to themselves.",
+      "E. Discharge the patient early to remove the hospital's liability."
+    ],
+    "correct": [
+      "A. Explain gently that you cannot keep this secret, as your primary duty is to keep them safe, and involve the psychiatric team.",
+      "C. Break confidentiality without telling the patient, and secretly arrange a psychiatric review.",
+      "B. Promise to keep their secret, but try to convince them to change their mind before tomorrow.",
+      "D. Inform the police immediately that the patient is a danger to themselves.",
+      "E. Discharge the patient early to remove the hospital's liability."
+    ],
+    "explanation": "Confidentiality must be breached if the patient is at serious risk of death or serious harm. The most professional approach is to inform the patient that you cannot keep this secret before escalating to psychiatry (A). Doing it behind their back (C) breaks trust but still ensures safety. Promising to keep the secret (B) is extremely dangerous. Calling the police (D) is inappropriate for a patient already in hospital. Discharging them (E) is negligent and malicious.",
+    "topic": "Confidentiality",
+    "subtopic": "Risk to Self",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 88,
+    "type": "Ranking",
+    "stem": "You are experiencing severe insomnia and stress due to personal issues. You are on shift and realise you are struggling to concentrate, making minor errors, and feel unsafe to practice. Rank the following actions.",
+    "options": [
+      "A. Inform the consultant or nurse in charge that you are unwell and need to step down from clinical duties immediately.",
+      "B. Ask a colleague to double-check all your prescribing and decisions for the rest of the shift.",
+      "C. Take a quick nap in the doctors' mess and hope you feel better.",
+      "D. Push through the shift, as you do not want to burden your colleagues with extra work.",
+      "E. Drink multiple energy drinks and try to work faster."
+    ],
+    "correct": [
+      "A. Inform the consultant or nurse in charge that you are unwell and need to step down from clinical duties immediately.",
+      "B. Ask a colleague to double-check all your prescribing and decisions for the rest of the shift.",
+      "C. Take a quick nap in the doctors' mess and hope you feel better.",
+      "D. Push through the shift, as you do not want to burden your colleagues with extra work.",
+      "E. Drink multiple energy drinks and try to work faster."
+    ],
+    "explanation": "Patient safety is paramount. If you are unfit to practice, you must declare it and step down (A), regardless of staffing pressures. Asking a colleague to check your work (B) is a temporary mitigation but unfair on them. Taking a nap (C) leaves the ward unstaffed without permission. Pushing through (D) or relying on caffeine (E) puts patients at direct risk of your impaired cognition.",
+    "topic": "Personal Health",
+    "subtopic": "Fitness to Practice",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 89,
+    "type": "Ranking",
+    "stem": "You realise that you omitted a patient's regular antiepileptic medication from their discharge summary written yesterday. The patient has already gone home. Rank the following actions.",
+    "options": [
+      "A. Call the patient at home immediately to inform them of the error and advise them to continue taking their regular medication.",
+      "B. Update the discharge summary, reprint it, and send a corrected copy to the patient's GP.",
+      "C. Fill out a clinical incident form (Datix) detailing the prescribing omission.",
+      "D. Hope the patient's GP notices the error when they review the summary next week.",
+      "E. Drive to the patient's house to deliver a handwritten prescription."
+    ],
+    "correct": [
+      "A. Call the patient at home immediately to inform them of the error and advise them to continue taking their regular medication.",
+      "B. Update the discharge summary, reprint it, and send a corrected copy to the patient's GP.",
+      "C. Fill out a clinical incident form (Datix) detailing the prescribing omission.",
+      "D. Hope the patient's GP notices the error when they review the summary next week.",
+      "E. Drive to the patient's house to deliver a handwritten prescription."
+    ],
+    "explanation": "Missing antiepileptics can cause life-threatening seizures. Immediate patient contact is required to prevent harm (A). Correcting the formal documentation for the GP follows (B). Institutional learning via Datix is necessary (C). Doing nothing (D) is dangerous negligence. Driving to their house (E) is a boundary crossing and an inefficient use of clinical time when a phone call works.",
+    "topic": "Patient Safety",
+    "subtopic": "Prescribing Errors",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 90,
+    "type": "MultipleChoice",
+    "stem": "You are assessing a patient in A&E who becomes aggressive. They stand up, clench their fists, trap you in the cubicle, and threaten to 'smash your face in'. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Attempt to physically restrain the patient yourself.",
+      "B. Activate the hospital panic alarm or call for security immediately.",
+      "C. Attempt to leave the cubicle, ensuring you do not turn your back on the patient.",
+      "D. Shout loudly for help from colleagues.",
+      "E. Threaten the patient back so they know you are not intimidated.",
+      "F. Try to administer intramuscular haloperidol to sedate them.",
+      "G. Tell the patient you will call the police if they don't sit down.",
+      "H. Ignore their behaviour and continue the medical assessment."
+    ],
+    "correct": [
+      "B. Activate the hospital panic alarm or call for security immediately.",
+      "C. Attempt to leave the cubicle, ensuring you do not turn your back on the patient.",
+      "D. Shout loudly for help from colleagues."
+    ],
+    "explanation": "Personal safety is the priority. You must alert others via panic alarm (B) or shouting (D), and extract yourself safely from the dangerous environment (C). Attempting physical restraint alone (A) or administering drugs alone (F) is highly dangerous. Antagonizing the patient (E, G) will likely escalate the violence. Ignoring the threat (H) is foolish and unsafe.",
+    "topic": "Personal Safety",
+    "subtopic": "Violent Patients",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 91,
+    "type": "MultipleChoice",
+    "stem": "A colleague posts a selfie on Instagram celebrating the end of a night shift. You notice that a patient lying in bed is clearly identifiable in the background of the photo. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Contact the colleague immediately and ask them to take the photo down.",
+      "B. Take a screenshot of the post to preserve evidence of the breach.",
+      "C. Inform your clinical supervisor or the Caldicott Guardian about the data breach.",
+      "D. Comment on the photo publicly so everyone knows it is a breach of confidentiality.",
+      "E. Do nothing, as it was probably an innocent mistake.",
+      "F. Report the colleague to the police for violating privacy laws.",
+      "G. Print the photo and show it to the patient to apologize.",
+      "H. Tell the colleague you will report them unless they buy you lunch."
+    ],
+    "correct": [
+      "A. Contact the colleague immediately and ask them to take the photo down.",
+      "B. Take a screenshot of the post to preserve evidence of the breach.",
+      "C. Inform your clinical supervisor or the Caldicott Guardian about the data breach."
+    ],
+    "explanation": "This is a serious breach of confidentiality. The immediate priority is damage limitation by getting the photo removed (A). Evidence must be secured (B) in case the post is deleted before management can investigate. A formal escalation to information governance (Caldicott Guardian/supervisor) is required (C). Public shaming (D) is unprofessional. Blackmail (H) is illegal. Doing nothing (E) is unacceptable.",
+    "topic": "Confidentiality",
+    "subtopic": "Social Media",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 92,
+    "type": "MultipleChoice",
+    "stem": "A female medical student tearfully tells you that her male consultant pressured her into performing a vaginal examination on an anaesthetized patient in theatre, without explicit prior consent for the student to do so. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Reassure and support the medical student, validating her distress.",
+      "B. Encourage the student to report the incident to her medical school tutor or the clinical director.",
+      "C. Document the student's disclosure accurately and objectively.",
+      "D. Confront the consultant angrily in front of the surgical team.",
+      "E. Tell the student that this is normal practice and she needs to get used to it.",
+      "F. Tell the patient what happened as soon as they wake up.",
+      "G. Ignore the issue as you are too junior to challenge a consultant.",
+      "H. Advise the student to drop out of her surgical rotation."
+    ],
+    "correct": [
+      "A. Reassure and support the medical student, validating her distress.",
+      "B. Encourage the student to report the incident to her medical school tutor or the clinical director.",
+      "C. Document the student's disclosure accurately and objectively."
+    ],
+    "explanation": "Examining patients under anaesthesia without explicit consent is assault and a severe GMC breach. Supporting the distressed student is the immediate priority (A). Encouraging formal reporting through appropriate channels ensures it is investigated properly (B). Documenting the disclosure provides a contemporaneous record (C). Normalizing assault (E) or ignoring it (G) is unacceptable. An angry confrontation (D) is unprofessional. Telling the patient immediately (F) should be managed formally by the Trust, not a junior doctor unilaterally.",
+    "topic": "Consent",
+    "subtopic": "Intimate Examinations",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 93,
+    "type": "MultipleChoice",
+    "stem": "A conscious, competent adult patient who is a Jehovah's Witness refuses a life-saving blood transfusion following trauma. After the patient loses consciousness, their distressed family begs you to administer the blood 'while they are asleep'. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Respect the patient's advanced refusal and do not administer the blood.",
+      "B. Administer the blood, as the family has now provided proxy consent.",
+      "C. Explain gently to the family that you are legally bound by the patient's competent decision.",
+      "D. Document the family's request and your refusal clearly in the notes.",
+      "E. Administer the blood secretly to save the patient's life without the family knowing.",
+      "F. Call the hospital legal team to get permission to override the patient.",
+      "G. Tell the family they are being selfish.",
+      "H. Ask the nursing staff to sneak the blood in alongside IV fluids."
+    ],
+    "correct": [
+      "A. Respect the patient's advanced refusal and do not administer the blood.",
+      "C. Explain gently to the family that you are legally bound by the patient's competent decision.",
+      "D. Document the family's request and your refusal clearly in the notes."
+    ],
+    "explanation": "A competent adult has the absolute right to refuse life-saving treatment. If they refuse blood while competent, this acts as an advance decision that must be respected when they lose capacity (A). Family cannot override a competent adult's refusal. You must communicate this clearly and empathetically to the distressed family (C) and document it legally (D). Administering the blood (B, E, H) is assault/battery.",
+    "topic": "Consent",
+    "subtopic": "Refusal of Treatment",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 94,
+    "type": "MultipleChoice",
+    "stem": "You notice an FY2 colleague writing normal blood pressure readings into the notes of several patients, without actually measuring their blood pressure. The colleague tells you it's to 'speed up discharges so we can go home early'. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Tell the colleague firmly that falsifying records is dangerous and unacceptable.",
+      "B. Immediately re-check the blood pressures of the affected patients yourself to ensure they are safe.",
+      "C. Inform the consultant or clinical supervisor about the falsification of records.",
+      "D. Help the colleague measure the rest of the observations to get the work done faster.",
+      "E. Threaten to physically harm the colleague if they do it again.",
+      "F. Ignore the behaviour as long as the patients look visually well.",
+      "G. Change the numbers in the notes back to what you think they should be.",
+      "H. Tell the patients their doctor has been lying to them."
+    ],
+    "correct": [
+      "A. Tell the colleague firmly that falsifying records is dangerous and unacceptable.",
+      "B. Immediately re-check the blood pressures of the affected patients yourself to ensure they are safe.",
+      "C. Inform the consultant or clinical supervisor about the falsification of records."
+    ],
+    "explanation": "Falsifying clinical records is a profound probity issue and a direct threat to patient safety. You must challenge the behaviour (A) and ensure the patients are actually safe by checking them (B). Escalation to a senior is mandatory because this behaviour breaches fundamental GMC principles (C). Helping them (D) or ignoring it (F) makes you complicit. Guessing numbers (G) is also falsifying records.",
+    "topic": "Probity",
+    "subtopic": "Falsifying Records",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 95,
+    "type": "SBA",
+    "stem": "A 40-year-old intravenous drug user presents with fever, malaise, and a new pansystolic murmur. You suspect infective endocarditis. He is currently haemodynamically stable. What is the most appropriate immediate step in his management?",
+    "options": [
+      "Commence intravenous broad-spectrum antibiotics immediately",
+      "Take 3 sets of blood cultures from different venepuncture sites",
+      "Arrange an urgent transoesophageal echocardiogram (TOE)",
+      "Commence intravenous flucloxacillin and gentamicin",
+      "Request a chest X-ray"
+    ],
+    "correct": "Take 3 sets of blood cultures from different venepuncture sites",
+    "explanation": "In suspected infective endocarditis, obtaining microbiological evidence is crucial for targeted therapy. Unless the patient is in severe sepsis or septic shock, 3 sets of blood cultures should be drawn from different sites at different times *before* initiating blind antibiotic therapy, as antibiotics will quickly sterilize the blood and hinder diagnosis.",
+    "topic": "Cardiovascular",
+    "subtopic": "Infective Endocarditis",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Cardiovascular",
+    "status": "Active"
+  },
+  {
+    "id": 96,
+    "type": "SBA",
+    "stem": "A 68-year-old man with known severe COPD presents with increased breathlessness, a productive cough with purulent sputum, and wheeze. An arterial blood gas on room air shows Type 2 Respiratory Failure. What is the target oxygen saturation range for this patient?",
+    "options": [
+      "88-92%",
+      "94-98%",
+      "100%",
+      "85-89%",
+      "90-94%"
+    ],
+    "correct": "88-92%",
+    "explanation": "Patients with known COPD or those at risk of Type 2 respiratory failure (hypercapnia) should have a target oxygen saturation of 88-92%. Over-oxygenating these patients can lead to worsening hypercapnia, respiratory acidosis, and depressed consciousness due to the Haldane effect and altered V/Q matching.",
+    "topic": "Respiratory",
+    "subtopic": "COPD",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Respiratory",
+    "status": "Active"
+  },
+  {
+    "id": 97,
+    "type": "SBA",
+    "stem": "A 75-year-old woman develops profuse, foul-smelling, watery diarrhoea 5 days after completing a course of co-amoxiclav for a chest infection. A stool sample is positive for Clostridium difficile toxin. She has a normal white cell count and is clinically stable. What is the first-line treatment according to current NICE guidelines?",
+    "options": [
+      "Oral metronidazole",
+      "Oral vancomycin",
+      "Intravenous vancomycin",
+      "Oral fidaxomicin",
+      "Loperamide"
+    ],
+    "correct": "Oral vancomycin",
+    "explanation": "Current NICE guidelines (updated 2021) recommend oral vancomycin as the first-line treatment for a first episode of mild, moderate, or severe C. difficile infection. Oral fidaxomicin is an alternative first-line or second-line. Metronidazole is no longer first-line due to resistance and lower efficacy. IV vancomycin is not secreted into the gut lumen, so it is ineffective for C. difficile.",
+    "topic": "Gastroenterology",
+    "subtopic": "C. difficile",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Gastroenterology",
+    "status": "Active"
+  },
+  {
+    "id": 98,
+    "type": "SBA",
+    "stem": "A 55-year-old woman presents with sudden, severe, electric-shock-like pain shooting across the right side of her jaw and cheek. The pain lasts for a few seconds and is triggered by chewing or brushing her teeth. What is the most appropriate first-line pharmacological treatment?",
+    "options": [
+      "Amitriptyline",
+      "Gabapentin",
+      "Pregabalin",
+      "Carbamazepine",
+      "Oral morphine"
+    ],
+    "correct": "Carbamazepine",
+    "explanation": "The clinical presentation is classic for Trigeminal Neuralgia (sudden, severe, unilateral, shock-like facial pain triggered by touch/chewing). According to NICE guidelines, Carbamazepine is the only first-line treatment specifically indicated for trigeminal neuralgia.",
+    "topic": "Neurology",
+    "subtopic": "Facial Pain",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Neurology",
+    "status": "Active"
+  },
+  {
+    "id": 99,
+    "type": "SBA",
+    "stem": "A 30-year-old woman, who is 36 weeks pregnant with known pre-eclampsia, begins to have a generalized tonic-clonic seizure on the delivery suite. The airway is secured and high-flow oxygen is applied. What is the most appropriate pharmacological treatment to stop the seizure and prevent recurrence?",
+    "options": [
+      "Intravenous diazepam",
+      "Intravenous magnesium sulphate",
+      "Intravenous phenytoin",
+      "Intravenous lorazepam",
+      "Intramuscular midazolam"
+    ],
+    "correct": "Intravenous magnesium sulphate",
+    "explanation": "This patient is experiencing eclampsia (seizures in the context of pre-eclampsia). The first-line definitive treatment for managing and preventing further eclamptic seizures is intravenous magnesium sulphate. Standard antiepileptics (like diazepam or lorazepam) are not first-line for eclampsia.",
+    "topic": "Obstetrics & Gynaecology",
+    "subtopic": "Pre-eclampsia / Eclampsia",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Reproductive",
+    "status": "Active"
+  },
+  {
+    "id": 100,
+    "type": "EMQ",
+    "theme": "Skin Malignancies",
+    "stem": "For each clinical description of a skin lesion, select the most likely diagnosis. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Malignant Melanoma",
+      "B. Basal Cell Carcinoma (BCC)",
+      "C. Squamous Cell Carcinoma (SCC)",
+      "D. Actinic Keratosis",
+      "E. Seborrhoeic Keratosis"
+    ],
+    "scenarios": [
+      {
+        "id": "100a",
+        "text": "A 60-year-old farmer presents with a slow-growing, pearly nodule on his nose with rolled edges and fine telangiectasia on its surface.",
+        "correct": "B. Basal Cell Carcinoma (BCC)"
+      },
+      {
+        "id": "100b",
+        "text": "A 70-year-old woman presents with a rapidly growing, tender, ulcerated, hyperkeratotic nodule on her sun-damaged forearm.",
+        "correct": "C. Squamous Cell Carcinoma (SCC)"
+      }
+    ],
+    "explanation": "A pearly nodule with rolled edges and telangiectasia is the classic appearance of a nodular Basal Cell Carcinoma. A rapidly growing, ulcerating, and tender lesion with keratinization on sun-exposed skin is highly suspicious for Squamous Cell Carcinoma. Melanomas are typically pigmented and asymmetrical.",
+    "topic": "Dermatology",
+    "subtopic": "Skin Cancer",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Dermatology",
+    "status": "Active"
+  },
+  {
+    "id": 101,
+    "type": "EMQ",
+    "theme": "Thyroid Function Tests",
+    "stem": "For each set of thyroid function tests, select the most likely clinical diagnosis. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Primary Hypothyroidism",
+      "B. Primary Hyperthyroidism",
+      "C. Secondary Hypothyroidism",
+      "D. Sick Euthyroid Syndrome",
+      "E. Subclinical Hypothyroidism"
+    ],
+    "scenarios": [
+      {
+        "id": "101a",
+        "text": "TSH: High. Free T4: Low.",
+        "correct": "A. Primary Hypothyroidism"
+      },
+      {
+        "id": "101b",
+        "text": "TSH: Low. Free T4: Low.",
+        "correct": "C. Secondary Hypothyroidism"
+      }
+    ],
+    "explanation": "In Primary Hypothyroidism (e.g., Hashimoto's), the thyroid gland fails, resulting in low T4 and a compensatory high TSH. In Secondary Hypothyroidism (e.g., pituitary failure), the pituitary fails to produce TSH, leading to both a low TSH and subsequently a low T4.",
+    "topic": "Endocrinology",
+    "subtopic": "Thyroid Disorders",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Endocrinology",
+    "status": "Active"
+  },
+  {
+    "id": 102,
+    "type": "EMQ",
+    "theme": "Joint Aspirate Analysis",
+    "stem": "For each joint aspirate microscopy result, select the most likely diagnosis. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Gout",
+      "B. Pseudogout",
+      "C. Septic Arthritis",
+      "D. Osteoarthritis",
+      "E. Rheumatoid Arthritis"
+    ],
+    "scenarios": [
+      {
+        "id": "102a",
+        "text": "Needle-shaped crystals that are strongly negatively birefringent under polarized light.",
+        "correct": "A. Gout"
+      },
+      {
+        "id": "102b",
+        "text": "Rhomboid-shaped crystals that are weakly positively birefringent under polarized light.",
+        "correct": "B. Pseudogout"
+      }
+    ],
+    "explanation": "Gout is caused by monosodium urate crystals, which appear needle-shaped and exhibit strong negative birefringence. Pseudogout is caused by calcium pyrophosphate deposition (CPPD), which produces rhomboid-shaped crystals with weak positive birefringence.",
+    "topic": "Musculoskeletal",
+    "subtopic": "Crystal Arthropathies",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Musculoskeletal",
+    "status": "Active"
+  },
+  {
+    "id": 103,
+    "type": "EMQ",
+    "theme": "Paediatric Injuries",
+    "stem": "For each child presenting with an injury, select the most appropriate conclusion. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Highly suspicious for non-accidental injury (NAI)",
+      "B. Typical accidental injury consistent with development",
+      "C. Pathological fracture due to osteogenesis imperfecta",
+      "D. Pathological fracture due to bone cyst",
+      "E. Birth injury"
+    ],
+    "scenarios": [
+      {
+        "id": "103a",
+        "text": "An 18-month-old toddler who has recently started walking presents with a linear bruise across the front of their shin.",
+        "correct": "B. Typical accidental injury consistent with development"
+      },
+      {
+        "id": "103b",
+        "text": "A 4-month-old non-mobile infant is brought to A&E by a parent with a fractured femur, described as having fallen off the sofa.",
+        "correct": "A. Highly suspicious for non-accidental injury (NAI)"
+      }
+    ],
+    "explanation": "Bruising over bony prominences (like shins) is typical in a newly mobile toddler. However, a major fracture (like a femur) in a non-mobile infant is extremely rare accidentally and represents a classic red flag for non-accidental injury (NAI), requiring immediate safeguarding action.",
+    "topic": "Paediatrics",
+    "subtopic": "Safeguarding",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Paediatrics",
+    "status": "Active"
+  },
+  {
+    "id": 104,
+    "type": "EMQ",
+    "theme": "Antidepressant Side Effects",
+    "stem": "For each patient presentation, select the antidepressant class most likely responsible for the adverse effect. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Selective Serotonin Reuptake Inhibitors (SSRIs)",
+      "B. Tricyclic Antidepressants (TCAs)",
+      "C. Monoamine Oxidase Inhibitors (MAOIs)",
+      "D. Serotonin-Noradrenaline Reuptake Inhibitors (SNRIs)",
+      "E. Noradrenergic and specific serotonergic antidepressants (NaSSAs)"
+    ],
+    "scenarios": [
+      {
+        "id": "104a",
+        "text": "A patient takes an overdose of their medication and presents with widened QRS complexes on ECG, dry mouth, blurred vision, and urinary retention.",
+        "correct": "B. Tricyclic Antidepressants (TCAs)"
+      },
+      {
+        "id": "104b",
+        "text": "A patient started on an antidepressant two weeks ago complains of new-onset nausea, insomnia, and sexual dysfunction.",
+        "correct": "A. Selective Serotonin Reuptake Inhibitors (SSRIs)"
+      }
+    ],
+    "explanation": "TCAs (e.g., amitriptyline) are notoriously dangerous in overdose, causing anticholinergic effects (dry mouth, retention) and lethal cardiac arrhythmias (QRS widening). SSRIs (e.g., sertraline) are generally safer in overdose but commonly cause nausea, insomnia, and sexual dysfunction upon initiation.",
+    "topic": "Psychiatry",
+    "subtopic": "Psychopharmacology",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Psychiatry",
+    "status": "Active"
   }
 ];
