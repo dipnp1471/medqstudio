@@ -1,12 +1,15 @@
 import { LogIn, UserPlus, Moon, Sun, User, LogOut } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
-export default function Header({ currentPage, setCurrentPage, onOpenAuth, theme, toggleTheme, currentUser, onLogout }) {
+export default function Header({ theme, toggleTheme, currentUser, onLogout }) {
+  const navigate = useNavigate();
+
   return (
     <header className="navbar animate-fade">
       <div className="navbar-inner">
         {/* Logo */}
-        <div className="logo-container" onClick={() => setCurrentPage('home')}>
+        <div className="logo-container" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
           <Logo size={34} />
           <span className="logo-text" style={{ color: 'var(--color-text-main)', display: 'flex', alignItems: 'center' }}>
             Med <span style={{ color: 'var(--color-brand-primary)', marginLeft: '0.25rem' }}>Q</span> 
@@ -17,38 +20,48 @@ export default function Header({ currentPage, setCurrentPage, onOpenAuth, theme,
         {/* Desktop Menu */}
         <nav>
           <ul className="nav-menu">
-            <li 
-              className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
-              onClick={() => setCurrentPage('home')}
-            >
-              Home
+            <li>
+              <NavLink 
+                to="/" 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                Home
+              </NavLink>
             </li>
-            <li 
-              className={`nav-link ${currentPage === 'practice' ? 'active' : ''}`}
-              onClick={() => setCurrentPage('practice')}
-            >
-              Free Practice
+            <li>
+              <NavLink 
+                to="/practice" 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                Free Practice
+              </NavLink>
             </li>
             {currentUser && (
-              <li 
-                className={`nav-link ${currentPage === 'dashboard' ? 'active' : ''}`}
-                onClick={() => setCurrentPage('dashboard')}
-              >
-                Dashboard
+              <li>
+                <NavLink 
+                  to="/dashboard" 
+                  className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                >
+                  Dashboard
+                </NavLink>
               </li>
             )}
-            <li 
-              className={`nav-link ${currentPage === 'how-it-works' ? 'active' : ''}`}
-              onClick={() => setCurrentPage('how-it-works')}
-            >
-              How It Works
+            <li>
+              <NavLink 
+                to="/how-it-works" 
+                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              >
+                How It Works
+              </NavLink>
             </li>
             {currentUser?.role === 'admin' && (
-              <li 
-                className={`nav-link ${currentPage === 'admin' ? 'active' : ''}`}
-                onClick={() => setCurrentPage('admin')}
-              >
-                Admin Panel
+              <li>
+                <NavLink 
+                  to="/admin" 
+                  className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+                >
+                  Admin Panel
+                </NavLink>
               </li>
             )}
           </ul>
@@ -104,11 +117,11 @@ export default function Header({ currentPage, setCurrentPage, onOpenAuth, theme,
             </div>
           ) : (
             <>
-              <button className="btn btn-secondary btn-sm" onClick={() => onOpenAuth('login')}>
+              <button className="btn btn-secondary btn-sm" onClick={() => navigate('/dashboard?tab=login')}>
                 <LogIn size={16} />
                 <span>Sign In</span>
               </button>
-              <button className="btn btn-primary btn-sm" onClick={() => onOpenAuth('register')}>
+              <button className="btn btn-primary btn-sm" onClick={() => navigate('/dashboard?tab=register')}>
                 <UserPlus size={16} />
                 <span>Register</span>
               </button>
@@ -119,3 +132,4 @@ export default function Header({ currentPage, setCurrentPage, onOpenAuth, theme,
     </header>
   );
 }
+

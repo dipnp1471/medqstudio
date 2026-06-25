@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import QuestionCard from '../components/QuestionCard';
 import { ArrowRight, RefreshCw, User, CheckCircle } from 'lucide-react';
 import { db } from '../services/db';
 
-export default function FreePractice({ questions, onOpenAuth, onFlagQuestion, currentUser }) {
+export default function FreePractice({ questions, onFlagQuestion, currentUser }) {
+  const navigate = useNavigate();
+
   // Filters
   const [paperFilter, setPaperFilter] = useState('All');
 
@@ -129,7 +132,7 @@ export default function FreePractice({ questions, onOpenAuth, onFlagQuestion, cu
             question={currentQuestion} 
             onAnswerSubmit={handleAnswerSubmit}
             onNextQuestion={handleNextQuestion}
-            onOpenAuth={onOpenAuth}
+            onOpenAuth={() => navigate('/dashboard?tab=login')}
             onFlagQuestion={onFlagQuestion}
             currentUser={currentUser}
           />
@@ -238,7 +241,7 @@ export default function FreePractice({ questions, onOpenAuth, onFlagQuestion, cu
               <li>Identify clinical weak spots</li>
               <li>Compete on national leaderboards</li>
             </ul>
-            <button className="btn btn-primary" onClick={() => onOpenAuth('register')} style={{ backgroundColor: 'var(--color-brand-secondary)', color: '#fff', border: 'none' }}>
+            <button className="btn btn-primary" onClick={() => navigate('/dashboard?tab=register')} style={{ backgroundColor: 'var(--color-brand-secondary)', color: '#fff', border: 'none' }}>
               <span>Create Account</span>
               <ArrowRight size={14} />
             </button>

@@ -1,28 +1,29 @@
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
-export default function Footer({ setCurrentPage }) {
+export default function Footer() {
   return (
     <footer className="footer animate-fade">
       <div className="footer-inner">
         {/* Brand Column */}
         <div className="footer-brand">
-          <div className="logo-container" style={{ cursor: 'pointer' }} onClick={() => setCurrentPage('home')}>
+          <Link to="/" className="logo-container" style={{ cursor: 'pointer', display: 'flex', textDecoration: 'none' }}>
             <Logo size={40} />
             <span className="logo-text" style={{ color: 'var(--color-text-light)', display: 'flex', alignItems: 'center' }}>
               Med <span style={{ color: 'var(--color-brand-primary)', marginLeft: '0.25rem' }}>Q</span>
               <span style={{ fontSize: '0.8rem', fontWeight: '500', letterSpacing: '0.15em', textTransform: 'uppercase', marginLeft: '0.5rem', color: 'var(--color-text-muted)' }}>Studios</span>
             </span>
-          </div>
+          </Link>
           <p style={{ fontSize: '0.85rem', lineHeight: '1.6' }}>
-            High-yield revision resources for medical professionals preparing for the Multi-Specialty Recruitment Assessment (MSRA). Aligning practice with the official exam blueprint.
+            High-yield revision resources for medical professionals preparing for British post graduate medical exams (like the MSRA, UKMLA, AKT). Aligning practice with the official exam blueprint and british guidelines.
           </p>
         </div>
 
         {/* Resources Column */}
         <div className="footer-links-col">
           <span className="footer-links-title">Resources</span>
-          <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); setCurrentPage('practice'); }}>Free Random Practice</a>
-          <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); setCurrentPage('how-it-works'); }}>Revision Science</a>
+          <Link to="/practice" className="footer-link">Free Random Practice</Link>
+          <Link to="/how-it-works" className="footer-link">The Ethos</Link>
         </div>
 
         {/* Support Column */}
@@ -41,3 +42,4 @@ export default function Footer({ setCurrentPage }) {
     </footer>
   );
 }
+

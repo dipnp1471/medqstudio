@@ -1,6 +1,9 @@
 import { BrainCircuit, Milestone, TrendingUp, Users, HeartHandshake, Lightbulb } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export default function HowItWorks({ setCurrentPage, onOpenAuth }) {
+export default function HowItWorks() {
+  const navigate = useNavigate();
+
   return (
     <div className="animate-fade">
       <div className="info-page-header">
@@ -101,10 +104,10 @@ export default function HowItWorks({ setCurrentPage, onOpenAuth }) {
             Unlock the free random practice engine or register to activate data-driven learning diagnostics.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <button className="btn btn-primary" onClick={() => setCurrentPage('practice')}>
+            <button className="btn btn-primary" onClick={() => navigate('/practice')}>
               Access Free Practice Mode
             </button>
-            <button className="btn btn-secondary" onClick={() => onOpenAuth('register')}>
+            <button className="btn btn-secondary" onClick={() => navigate('/dashboard?tab=register')}>
               Create Free Account
             </button>
           </div>
@@ -113,3 +116,4 @@ export default function HowItWorks({ setCurrentPage, onOpenAuth }) {
     </div>
   );
 }
+

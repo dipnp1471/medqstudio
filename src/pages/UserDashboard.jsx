@@ -1,9 +1,30 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import QuestionCard from '../components/QuestionCard';
 import { db } from '../services/db';
-import { Trophy, Activity, Edit3, Target, CheckCircle, BarChart3, AlertCircle, HelpCircle, X } from 'lucide-react';
+import { Trophy, Activity, Edit3, Target, CheckCircle, BarChart3, AlertCircle, HelpCircle, X, Award, Clock, ShieldCheck, HeartPulse } from 'lucide-react';
 
-export default function UserDashboard({ currentUser, questions, updateQuestions }) {
+export default function UserDashboard({ currentUser, questions, updateQuestions, onLoginSuccess }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabParam = searchParams.get('tab') || 'login';
+  
+  // Auth state
+  const [authTab, setAuthTab] = useState(tabParam);
+  
+  // Sync tab state with query param if it changes
+  useEffect(() => {
+    if (tabParam === 'login' || tabParam === 'register') {
+      setAuthTab(tabParam);
+    }
+  }, [tabParam]);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [alias, setAlias] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
+
   const [activeTab, setActiveTab] = useState('stats');
   const [stats, setStats] = useState(null);
   const [leaderboard, setLeaderboard] = useState([]);
@@ -26,6 +47,52 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
     correct_answer: '',
     explanation: ''
   });
+
+  const handleAuthSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
+
+    if (authTab === 'register') {
+      try {
+        if (email.toLowerCase() === 'admin@medqstudios.com') {
+          setErrorMsg('This email address is already registered.');
+          return;
+        }
+
+        const newUser = await db.registerUser({
+          displayName: displayName || email.split('@')[0],
+          email: email,
+          password: password,
+          role: 'user',
+          alias: alias || 'Anonymous User'
+        });
+
+        onLoginSuccess(newUser);
+        setSuccessMsg(`Welcome, ${newUser.displayName}! Your account has been created and you are now signed in.`);
+      } catch (err) {
+        setErrorMsg(err.message || 'Registration failed.');
+      }
+    } else {
+      if (email.toLowerCase() === 'admin@medqstudios.com' && password === 'admin') {
+        const adminUser = {
+          displayName: 'Admin Dr. MedQ',
+          email: 'admin@medqstudios.com',
+          role: 'admin'
+        };
+        onLoginSuccess(adminUser);
+        setSuccessMsg('Successfully signed in as Administrator.');
+        return;
+      }
+
+      try {
+        const matchedUser = await db.loginUser(email, password);
+        onLoginSuccess(matchedUser);
+        setSuccessMsg(`Welcome back, ${matchedUser.displayName}!`);
+      } catch (err) {
+        setErrorMsg('Invalid email address or password.');
+      }
+    }
+  };
 
   const selectQuestion = (paperFilters, specialtyFilters, userStatsHistory = stats?.history || []) => {
     // 1. Find questions matching the filters
@@ -55,7 +122,10 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
   };
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      setLoading(false);
+      return;
+    }
 
     const loadData = async () => {
       setLoading(true);
@@ -82,6 +152,7 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
 
     loadData();
   }, [currentUser, questions]);
+
 
   const loadNextQuestion = async () => {
     const updatedStats = await db.getUserStats(currentUser.email);
@@ -180,12 +251,226 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
     );
   }
 
+  if (!currentUser) {
+    return (
+      <div className="animate-fade" style={{ maxWidth: '550px', margin: '2rem auto' }}>
+        <div className="card" style={{ padding: '2.5rem' }}>
+          {/* Tabs */}
+          <div style={{ display: 'flex', borderBottom: '1px solid var(--color-border)', marginBottom: '2rem' }}>
+            <button 
+              className="btn-text" 
+              style={{ 
+                flex: 1, 
+                padding: '1rem', 
+                fontWeight: '600', 
+                fontSize: '1.1rem',
+                color: authTab === 'login' ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
+                borderBottom: authTab === 'login' ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
+                borderRadius: 0,
+                transition: 'all var(--transition-fast)',
+                cursor: 'pointer',
+                background: 'none',
+                borderTop: 'none',
+                borderLeft: 'none',
+                borderRight: 'none'
+              }}
+              onClick={() => {
+                setAuthTab('login');
+                setSearchParams({ tab: 'login' });
+                setErrorMsg('');
+              }}
+            >
+              Sign In
+            </button>
+            <button 
+              className="btn-text" 
+              style={{ 
+                flex: 1, 
+                padding: '1rem', 
+                fontWeight: '600', 
+                fontSize: '1.1rem',
+                color: authTab === 'register' ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
+                borderBottom: authTab === 'register' ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
+                borderRadius: 0,
+                transition: 'all var(--transition-fast)',
+                cursor: 'pointer',
+                background: 'none',
+                borderTop: 'none',
+                borderLeft: 'none',
+                borderRight: 'none'
+              }}
+              onClick={() => {
+                setAuthTab('register');
+                setSearchParams({ tab: 'register' });
+                setErrorMsg('');
+              }}
+            >
+              Register
+            </button>
+          </div>
+
+          <h2 style={{ fontSize: '1.75rem', marginBottom: '0.5rem', textAlign: 'center' }}>
+            {authTab === 'login' ? 'Sign In to Your Account' : 'Create Free Account'}
+          </h2>
+          <p className="text-muted text-center" style={{ marginBottom: '2rem', fontSize: '0.95rem' }}>
+            {authTab === 'login' 
+              ? 'Unlock detailed dashboard performance statistics and timed mocks.' 
+              : 'Create an account to track your progress and compete on leaderboards.'}
+          </p>
+
+          {errorMsg && (
+            <div 
+              style={{ 
+                padding: '0.75rem 1rem', 
+                backgroundColor: 'var(--color-error-bg)', 
+                border: '1px solid var(--color-error-border)', 
+                color: 'var(--color-error)', 
+                borderRadius: 'var(--radius-sm)', 
+                fontSize: '0.9rem', 
+                marginBottom: '1.5rem' 
+              }}
+            >
+              {errorMsg}
+            </div>
+          )}
+
+          <form onSubmit={handleAuthSubmit}>
+            {authTab === 'register' && (
+              <>
+                <div className="form-group" style={{ marginBottom: '1.25rem' }}>
+                  <label className="form-label" htmlFor="displayName" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Display Name</label>
+                  <input
+                    type="text"
+                    id="displayName"
+                    className="form-input"
+                    placeholder="e.g. Dr. Sarah J."
+                    required
+                    value={displayName}
+                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group" style={{ marginBottom: '1.25rem' }}>
+                  <label className="form-label" htmlFor="alias" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Leaderboard Alias (Fun Name!)</label>
+                  <input
+                    type="text"
+                    id="alias"
+                    className="form-input"
+                    placeholder="e.g. Cardio Dolphin 1234"
+                    required
+                    value={alias}
+                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
+                    onChange={(e) => setAlias(e.target.value)}
+                  />
+                  <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
+                    This is how you will appear on the public leaderboards (e.g. Speciality + Animal + PIN)
+                  </p>
+                </div>
+              </>
+            )}
+            <div className="form-group" style={{ marginBottom: '1.25rem' }}>
+              <label className="form-label" htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Email Address</label>
+              <input
+                type="email"
+                id="email"
+                className="form-input"
+                placeholder="name@doctors.org.uk"
+                required
+                value={email}
+                style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group" style={{ marginBottom: '1.5rem' }}>
+              <label className="form-label" htmlFor="password" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Password</label>
+              <input
+                type="password"
+                id="password"
+                className="form-input"
+                placeholder="••••••••"
+                required
+                value={password}
+                style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button className="btn btn-primary" type="submit" style={{ width: '100%', padding: '0.75rem', fontWeight: '600' }}>
+              {authTab === 'login' ? 'Sign In' : 'Register'}
+            </button>
+          </form>
+
+          {/* Test credentials helper */}
+          {authTab === 'login' && (
+            <div 
+              style={{ 
+                marginTop: '1.5rem', 
+                padding: '1rem', 
+                backgroundColor: 'var(--color-brand-light)', 
+                border: '1px solid var(--color-border)', 
+                borderRadius: 'var(--radius-sm)', 
+                fontSize: '0.85rem',
+                color: 'var(--color-text-muted)',
+                textAlign: 'center'
+              }}
+            >
+              🔑 <strong>Demo Administrator Credentials:</strong>
+              <div style={{ marginTop: '0.25rem' }}>
+                Email: <code style={{ color: 'var(--color-brand-secondary)' }}>admin@medqstudios.com</code>
+              </div>
+              <div>
+                Password: <code style={{ color: 'var(--color-brand-secondary)' }}>admin</code>
+              </div>
+            </div>
+          )}
+
+          {/* Benefits box (Register only) */}
+          {authTab === 'register' && (
+            <div 
+              style={{ 
+                marginTop: '1.5rem', 
+                padding: '1rem', 
+                backgroundColor: 'var(--color-brand-light)', 
+                border: '1px solid var(--color-border)', 
+                borderRadius: 'var(--radius-sm)',
+                fontSize: '0.85rem'
+              }}
+            >
+              <span style={{ fontWeight: '700', color: 'var(--color-brand-primary)', display: 'block', marginBottom: '0.5rem' }}>
+                🔑 Registered Account Benefits:
+              </span>
+              <ul style={{ listStyle: 'none', paddingLeft: 0, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <ShieldCheck size={14} style={{ color: 'var(--color-brand-secondary)' }} />
+                  Permanent revision progress tracking
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Award size={14} style={{ color: 'var(--color-brand-secondary)' }} />
+                  Compete on weekly/monthly leaderboards
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <Clock size={14} style={{ color: 'var(--color-brand-secondary)' }} />
+                  Full timed exam mode simulations
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <HeartPulse size={14} style={{ color: 'var(--color-brand-secondary)' }} />
+                  Submit new questions & flag updates
+                </li>
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   const accuracy = stats?.totalAnswered > 0 
     ? Math.round((stats.correctAnswered / stats.totalAnswered) * 100) 
     : 0;
 
   return (
     <div className="dashboard-container animate-fade">
+
       <div className="practice-sidebar">
         <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem' }}>
           <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.2rem', color: 'var(--color-brand-primary)' }}>

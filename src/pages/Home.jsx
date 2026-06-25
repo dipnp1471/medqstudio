@@ -1,6 +1,9 @@
 import { Play, UserCheck, BookOpen, Brain, Trophy, ShieldAlert } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export default function Home({ questions, setCurrentPage, onOpenAuth }) {
+export default function Home({ questions }) {
+  const navigate = useNavigate();
+
   return (
     <div className="animate-fade">
       {/* Hero Section */}
@@ -13,11 +16,11 @@ export default function Home({ questions, setCurrentPage, onOpenAuth }) {
         </p>
 
         <div className="hero-actions">
-          <button className="btn btn-primary" onClick={() => setCurrentPage('practice')}>
+          <button className="btn btn-primary" onClick={() => navigate('/practice')}>
             <Play size={18} strokeWidth={2.5} />
             <span>Try Free Practice Mode</span>
           </button>
-          <button className="btn btn-secondary" onClick={() => onOpenAuth('register')}>
+          <button className="btn btn-secondary" onClick={() => navigate('/dashboard?tab=register')}>
             <UserCheck size={18} />
             <span>Create Free Account</span>
           </button>
@@ -66,7 +69,7 @@ export default function Home({ questions, setCurrentPage, onOpenAuth }) {
             </div>
             <h3>Competitive Leaderboards</h3>
             <p className="text-muted">
-              Rank anonymously against other candidates on weekly and monthly correct-answer tallies. Leverage peer motivation to drive consistent daily practice.
+              Rank anonymously against other candidates on weekly and monthly correct-answer tallies. Friendly competition to drive consistent daily practice with a fun surprise offered to the leader.
             </p>
           </div>
 
@@ -103,12 +106,12 @@ export default function Home({ questions, setCurrentPage, onOpenAuth }) {
             Get started immediately with our free random practice mode. No log-in required. Unlock topic-wise filtering, timed mocks, and dashboard history when you register.
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <button className="btn btn-primary" onClick={() => setCurrentPage('practice')}>
+            <button className="btn btn-primary" onClick={() => navigate('/practice')}>
               Start Free Practice Now
             </button>
             <button
               className="btn btn-outline"
-              onClick={() => onOpenAuth('register')}
+              onClick={() => navigate('/dashboard?tab=register')}
               style={{ color: 'var(--color-brand-primary)', borderColor: 'var(--color-brand-primary)' }}
             >
               Sign Up for Progress Tracking
@@ -119,3 +122,4 @@ export default function Home({ questions, setCurrentPage, onOpenAuth }) {
     </div>
   );
 }
+
