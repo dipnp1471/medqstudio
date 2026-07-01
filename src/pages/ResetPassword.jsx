@@ -1,29 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { supabase } from '../services/supabase';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function ResetPassword() {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  
   const [email, setEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isUpdateMode, setIsUpdateMode] = useState(false);
-
-  useEffect(() => {
-    // Check if we are in the "update password" mode (after clicking email link)
-    supabase.auth.onAuthStateChange((event) => {
-      if (event === 'PASSWORD_RECOVERY') {
-        setTimeout(() => setIsUpdateMode(true), 0);
-      }
-    });
-    
-    // Also check hash for access_token which might indicate a recovery link was clicked
-    if (window.location.hash && window.location.hash.includes('type=recovery')) {
-      setTimeout(() => setIsUpdateMode(true), 0);
-    }
-  }, []);
+  
+  // If the user is authenticated, they are in "Update Password" mode.
+  // This happens automatically when they click the reset link in their email.
+  const isUpdateMode = !!currentUser;
 
   const handleRequestReset = async (e) => {
     e.preventDefault();

@@ -47,6 +47,7 @@ export default function AuthPage() {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleGoogleLogin = async () => {
     setLoading(true);
     setErrorMsg('');
