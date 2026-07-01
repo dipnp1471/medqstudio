@@ -9,7 +9,7 @@ export default function Home({ questions }) {
       {/* Hero Section */}
       <section className="hero-section">
         <h1 className="hero-title">
-          Practice high volumes of questions and consolidate your knowledge and memory.
+          Practice questions to get ready for your examinations with active recall and spaced repetition
         </h1>
         <p className="hero-subtitle">
           Practice your applied clinical knowledge and professional dilemmas.

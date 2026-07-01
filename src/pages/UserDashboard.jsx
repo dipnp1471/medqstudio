@@ -1,35 +1,21 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import QuestionCard from '../components/QuestionCard';
 import { db } from '../services/db';
-import { Trophy, Activity, Edit3, Target, CheckCircle, BarChart3, AlertCircle, HelpCircle, X, Award, Clock, ShieldCheck, HeartPulse } from 'lucide-react';
+import { Trophy, Activity, Edit3, Target, CheckCircle, BarChart3, AlertCircle, HelpCircle, X, Settings } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
-export default function UserDashboard({ currentUser, questions, updateQuestions, onLoginSuccess }) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const tabParam = searchParams.get('tab') || 'login';
+export default function UserDashboard({ currentUser, questions, updateQuestions }) {
+  const { updateAlias } = useAuth();
   
-  // Auth state
-  const [authTab, setAuthTab] = useState(tabParam);
-  
-  // Sync tab state with query param if it changes
-  useEffect(() => {
-    if (tabParam === 'login' || tabParam === 'register') {
-      setAuthTab(tabParam);
-    }
-  }, [tabParam]);
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [alias, setAlias] = useState('');
-  const [successMsg, setSuccessMsg] = useState('');
-  const [errorMsg, setErrorMsg] = useState('');
-
   const [activeTab, setActiveTab] = useState('stats');
   const [stats, setStats] = useState(null);
   const [leaderboard, setLeaderboard] = useState([]);
   const [hasSubmitPrivilege, setHasSubmitPrivilege] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // Settings State
+  const [newAlias, setNewAlias] = useState('');
+  const [aliasSuccess, setAliasSuccess] = useState('');
 
   // Practice state
   const [selectedFilters, setSelectedFilters] = useState(['Clinical Problem Solving', 'Professional Dilemmas']);
@@ -47,52 +33,6 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
     correct_answer: '',
     explanation: ''
   });
-
-  const handleAuthSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMsg('');
-
-    if (authTab === 'register') {
-      try {
-        if (email.toLowerCase() === 'admin@medqstudios.com') {
-          setErrorMsg('This email address is already registered.');
-          return;
-        }
-
-        const newUser = await db.registerUser({
-          displayName: displayName || email.split('@')[0],
-          email: email,
-          password: password,
-          role: 'user',
-          alias: alias || 'Anonymous User'
-        });
-
-        onLoginSuccess(newUser);
-        setSuccessMsg(`Welcome, ${newUser.displayName}! Your account has been created and you are now signed in.`);
-      } catch (err) {
-        setErrorMsg(err.message || 'Registration failed.');
-      }
-    } else {
-      if (email.toLowerCase() === 'admin@medqstudios.com' && password === 'admin') {
-        const adminUser = {
-          displayName: 'Admin Dr. MedQ',
-          email: 'admin@medqstudios.com',
-          role: 'admin'
-        };
-        onLoginSuccess(adminUser);
-        setSuccessMsg('Successfully signed in as Administrator.');
-        return;
-      }
-
-      try {
-        const matchedUser = await db.loginUser(email, password);
-        onLoginSuccess(matchedUser);
-        setSuccessMsg(`Welcome back, ${matchedUser.displayName}!`);
-      } catch (err) {
-        setErrorMsg('Invalid email address or password.');
-      }
-    }
-  };
 
   const selectQuestion = (paperFilters, specialtyFilters, userStatsHistory = stats?.history || []) => {
     // 1. Find questions matching the filters
@@ -123,7 +63,7 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
 
   useEffect(() => {
     if (!currentUser) {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 0);
       return;
     }
 
@@ -139,10 +79,11 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
         const canSubmit = await db.hasSubmitPrivilege(currentUser.email);
         setHasSubmitPrivilege(canSubmit);
 
-        // Load initial question based on current filter & history
         if (userStats) {
           selectQuestion(selectedFilters, selectedSpecialties, userStats.history || []);
         }
+        
+        setNewAlias(currentUser.alias || '');
       } catch (err) {
         console.error('Failed to load dashboard data', err);
       } finally {
@@ -151,8 +92,8 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
     };
 
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, questions]);
-
 
   const loadNextQuestion = async () => {
     const updatedStats = await db.getUserStats(currentUser.email);
@@ -189,7 +130,6 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
         isCorrect
       });
       setStats(updatedStats);
-      // Update leaderboard after answer
       const board = await db.getLeaderboard();
       setLeaderboard(board);
     } catch (err) {
@@ -243,222 +183,23 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
     }
   };
 
+  const handleSaveAlias = async (e) => {
+    e.preventDefault();
+    try {
+      await updateAlias(newAlias);
+      setAliasSuccess("Alias updated successfully!");
+      setTimeout(() => setAliasSuccess(""), 3000);
+    } catch (err) {
+      console.error("Failed to update alias", err);
+    }
+  };
+
   if (loading) {
     return (
       <div className="dashboard-container animate-fade" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
-        <p>Loading Dashboard...</p>
-      </div>
-    );
-  }
-
-  if (!currentUser) {
-    return (
-      <div className="animate-fade" style={{ maxWidth: '550px', margin: '2rem auto' }}>
-        <div className="card" style={{ padding: '2.5rem' }}>
-          {/* Tabs */}
-          <div style={{ display: 'flex', borderBottom: '1px solid var(--color-border)', marginBottom: '2rem' }}>
-            <button 
-              className="btn-text" 
-              style={{ 
-                flex: 1, 
-                padding: '1rem', 
-                fontWeight: '600', 
-                fontSize: '1.1rem',
-                color: authTab === 'login' ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
-                borderBottom: authTab === 'login' ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
-                borderRadius: 0,
-                transition: 'all var(--transition-fast)',
-                cursor: 'pointer',
-                background: 'none',
-                borderTop: 'none',
-                borderLeft: 'none',
-                borderRight: 'none'
-              }}
-              onClick={() => {
-                setAuthTab('login');
-                setSearchParams({ tab: 'login' });
-                setErrorMsg('');
-              }}
-            >
-              Sign In
-            </button>
-            <button 
-              className="btn-text" 
-              style={{ 
-                flex: 1, 
-                padding: '1rem', 
-                fontWeight: '600', 
-                fontSize: '1.1rem',
-                color: authTab === 'register' ? 'var(--color-brand-primary)' : 'var(--color-text-muted)',
-                borderBottom: authTab === 'register' ? '3px solid var(--color-brand-primary)' : '3px solid transparent',
-                borderRadius: 0,
-                transition: 'all var(--transition-fast)',
-                cursor: 'pointer',
-                background: 'none',
-                borderTop: 'none',
-                borderLeft: 'none',
-                borderRight: 'none'
-              }}
-              onClick={() => {
-                setAuthTab('register');
-                setSearchParams({ tab: 'register' });
-                setErrorMsg('');
-              }}
-            >
-              Register
-            </button>
-          </div>
-
-          <h2 style={{ fontSize: '1.75rem', marginBottom: '0.5rem', textAlign: 'center' }}>
-            {authTab === 'login' ? 'Sign In to Your Account' : 'Create Free Account'}
-          </h2>
-          <p className="text-muted text-center" style={{ marginBottom: '2rem', fontSize: '0.95rem' }}>
-            {authTab === 'login' 
-              ? 'Unlock detailed dashboard performance statistics and timed mocks.' 
-              : 'Create an account to track your progress and compete on leaderboards.'}
-          </p>
-
-          {errorMsg && (
-            <div 
-              style={{ 
-                padding: '0.75rem 1rem', 
-                backgroundColor: 'var(--color-error-bg)', 
-                border: '1px solid var(--color-error-border)', 
-                color: 'var(--color-error)', 
-                borderRadius: 'var(--radius-sm)', 
-                fontSize: '0.9rem', 
-                marginBottom: '1.5rem' 
-              }}
-            >
-              {errorMsg}
-            </div>
-          )}
-
-          <form onSubmit={handleAuthSubmit}>
-            {authTab === 'register' && (
-              <>
-                <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-                  <label className="form-label" htmlFor="displayName" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Display Name</label>
-                  <input
-                    type="text"
-                    id="displayName"
-                    className="form-input"
-                    placeholder="e.g. Dr. Sarah J."
-                    required
-                    value={displayName}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                  />
-                </div>
-                <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-                  <label className="form-label" htmlFor="alias" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Leaderboard Alias (Fun Name!)</label>
-                  <input
-                    type="text"
-                    id="alias"
-                    className="form-input"
-                    placeholder="e.g. Cardio Dolphin 1234"
-                    required
-                    value={alias}
-                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
-                    onChange={(e) => setAlias(e.target.value)}
-                  />
-                  <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
-                    This is how you will appear on the public leaderboards (e.g. Speciality + Animal + PIN)
-                  </p>
-                </div>
-              </>
-            )}
-            <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-              <label className="form-label" htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Email Address</label>
-              <input
-                type="email"
-                id="email"
-                className="form-input"
-                placeholder="name@doctors.org.uk"
-                required
-                value={email}
-                style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-              <label className="form-label" htmlFor="password" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Password</label>
-              <input
-                type="password"
-                id="password"
-                className="form-input"
-                placeholder="••••••••"
-                required
-                value={password}
-                style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-
-            <button className="btn btn-primary" type="submit" style={{ width: '100%', padding: '0.75rem', fontWeight: '600' }}>
-              {authTab === 'login' ? 'Sign In' : 'Register'}
-            </button>
-          </form>
-
-          {/* Test credentials helper */}
-          {authTab === 'login' && (
-            <div 
-              style={{ 
-                marginTop: '1.5rem', 
-                padding: '1rem', 
-                backgroundColor: 'var(--color-brand-light)', 
-                border: '1px solid var(--color-border)', 
-                borderRadius: 'var(--radius-sm)', 
-                fontSize: '0.85rem',
-                color: 'var(--color-text-muted)',
-                textAlign: 'center'
-              }}
-            >
-              🔑 <strong>Demo Administrator Credentials:</strong>
-              <div style={{ marginTop: '0.25rem' }}>
-                Email: <code style={{ color: 'var(--color-brand-secondary)' }}>admin@medqstudios.com</code>
-              </div>
-              <div>
-                Password: <code style={{ color: 'var(--color-brand-secondary)' }}>admin</code>
-              </div>
-            </div>
-          )}
-
-          {/* Benefits box (Register only) */}
-          {authTab === 'register' && (
-            <div 
-              style={{ 
-                marginTop: '1.5rem', 
-                padding: '1rem', 
-                backgroundColor: 'var(--color-brand-light)', 
-                border: '1px solid var(--color-border)', 
-                borderRadius: 'var(--radius-sm)',
-                fontSize: '0.85rem'
-              }}
-            >
-              <span style={{ fontWeight: '700', color: 'var(--color-brand-primary)', display: 'block', marginBottom: '0.5rem' }}>
-                🔑 Registered Account Benefits:
-              </span>
-              <ul style={{ listStyle: 'none', paddingLeft: 0, display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <ShieldCheck size={14} style={{ color: 'var(--color-brand-secondary)' }} />
-                  Permanent revision progress tracking
-                </li>
-                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Award size={14} style={{ color: 'var(--color-brand-secondary)' }} />
-                  Compete on weekly/monthly leaderboards
-                </li>
-                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Clock size={14} style={{ color: 'var(--color-brand-secondary)' }} />
-                  Full timed exam mode simulations
-                </li>
-                <li style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <HeartPulse size={14} style={{ color: 'var(--color-brand-secondary)' }} />
-                  Submit new questions & flag updates
-                </li>
-              </ul>
-            </div>
-          )}
+        <div className="text-center">
+          <div style={{ border: '3px solid var(--color-border)', borderTopColor: 'var(--color-brand-secondary)', borderRadius: '50%', width: '30px', height: '30px', animation: 'spin 1s linear infinite', margin: '0 auto 1rem auto' }}></div>
+          <p className="text-muted">Loading Dashboard...</p>
         </div>
       </div>
     );
@@ -474,7 +215,7 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
       <div className="practice-sidebar">
         <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem' }}>
           <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.2rem', color: 'var(--color-brand-primary)' }}>
-            Welcome, {currentUser.displayName}
+            Welcome, {currentUser?.alias || currentUser?.email?.split('@')[0]}
           </h3>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
             <li>
@@ -515,6 +256,15 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
                 </button>
               </li>
             )}
+            <li>
+              <button 
+                className={`btn ${activeTab === 'settings' ? 'btn-primary' : 'btn-secondary'}`} 
+                style={{ width: '100%', justifyContent: 'flex-start', display: 'flex', gap: '0.5rem' }}
+                onClick={() => setActiveTab('settings')}
+              >
+                <Settings size={16} /> Settings
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -719,6 +469,42 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
           </div>
         )}
 
+        {/* SETTINGS TAB */}
+        {activeTab === 'settings' && (
+          <div className="card animate-fade" style={{ padding: '2rem' }}>
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
+              <Settings size={24} style={{ color: 'var(--color-brand-secondary)' }} />
+              Account Settings
+            </h2>
+            <div style={{ maxWidth: '400px' }}>
+              {aliasSuccess && (
+                <div style={{ padding: '1rem', backgroundColor: 'var(--color-success-bg, #ecfdf5)', color: 'var(--color-success, #065f46)', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem', border: '1px solid var(--color-success-border, #a7f3d0)' }}>
+                  {aliasSuccess}
+                </div>
+              )}
+              <form onSubmit={handleSaveAlias}>
+                <div className="form-group" style={{ marginBottom: '1.5rem' }}>
+                  <label className="form-label" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Leaderboard Alias</label>
+                  <input
+                    type="text"
+                    className="form-input"
+                    value={newAlias}
+                    onChange={(e) => setNewAlias(e.target.value)}
+                    required
+                    style={{ width: '100%', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', backgroundColor: 'var(--color-bg-card)', color: 'var(--color-text-main)', outline: 'none' }}
+                  />
+                  <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.5rem' }}>
+                    This name will appear on the public leaderboards.
+                  </p>
+                </div>
+                <button type="submit" className="btn btn-primary">
+                  Save Settings
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+
         {/* SUBMIT QUESTION TAB */}
         {activeTab === 'submit' && hasSubmitPrivilege && (
           <div className="card animate-fade" style={{ padding: '2rem' }}>
@@ -798,13 +584,12 @@ export default function UserDashboard({ currentUser, questions, updateQuestions,
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary" style={{ backgroundColor: 'var(--color-brand-secondary)', borderColor: 'var(--color-brand-secondary)' }}>
+              <button className="btn btn-primary" type="submit" style={{ width: '100%', padding: '0.75rem', fontWeight: '600', marginTop: '1rem' }}>
                 Submit to Question Bank
               </button>
             </form>
           </div>
         )}
-
       </div>
     </div>
   );

@@ -8,34 +8,35 @@ export const getCurrentWeek = () => {
 // API
 export const db = {
   // --- USERS ---
-  registerUser: async (userData) => {
-    const emailLower = userData.email.toLowerCase();
+  syncSupabaseUser: async (supabaseUser) => {
+    const emailLower = supabaseUser.email.toLowerCase();
     
-    // Check if user exists
     const { data: existingUser, error: checkError } = await supabase
       .from('users')
-      .select('email')
+      .select('*')
       .eq('email', emailLower)
       .maybeSingle();
 
     if (checkError) throw checkError;
+    
     if (existingUser) {
-      throw new Error('User already exists');
+      return existingUser;
     }
 
-    // Insert into users table
-    const { error: userError } = await supabase
+    const randomAlias = `Doctor_${Math.floor(Math.random() * 10000)}`;
+
+    const { data: newUser, error: userError } = await supabase
       .from('users')
       .insert([{
         email: emailLower,
-        password: userData.password,
-        alias: userData.alias,
-        role: userData.role || 'user'
-      }]);
+        alias: randomAlias,
+        role: 'user'
+      }])
+      .select()
+      .single();
 
     if (userError) throw userError;
 
-    // Initialize stats for this user
     const { error: statsError } = await supabase
       .from('stats')
       .insert([{
@@ -52,25 +53,19 @@ export const db = {
 
     if (statsError) throw statsError;
 
-    return {
-      ...userData,
-      email: emailLower,
-      role: userData.role || 'user'
-    };
+    return newUser;
   },
 
-  loginUser: async (email, password) => {
-    const { data: user, error } = await supabase
+  updateUserAlias: async (email, newAlias) => {
+    const { data: updated, error } = await supabase
       .from('users')
-      .select('*')
+      .update({ alias: newAlias })
       .eq('email', email.toLowerCase())
-      .eq('password', password)
-      .maybeSingle();
-
-    if (error || !user) {
-      throw new Error('Invalid credentials');
-    }
-    return user;
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return updated;
   },
 
   getAllUsers: async () => {

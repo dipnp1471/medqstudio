@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -7,32 +7,13 @@ import FreePractice from './pages/FreePractice';
 import HowItWorks from './pages/HowItWorks';
 import AdminDashboard from './pages/AdminDashboard';
 import UserDashboard from './pages/UserDashboard';
+import AuthPage from './pages/AuthPage';
+import ResetPassword from './pages/ResetPassword';
 import { db } from './services/db';
+import { useAuth } from './context/AuthContext';
 
 export default function App() {
-  const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(() => {
-    const saved = localStorage.getItem('currentUser');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        console.error('Failed to parse saved user from localStorage', e);
-      }
-    }
-    return null;
-  });
-
-  const handleLoginSuccess = (user) => {
-    setCurrentUser(user);
-    localStorage.setItem('currentUser', JSON.stringify(user));
-  };
-
-  const handleLogout = () => {
-    setCurrentUser(null);
-    localStorage.removeItem('currentUser');
-    navigate('/');
-  };
+  const { currentUser, dbUser, logout } = useAuth();
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'dark';
@@ -88,8 +69,8 @@ export default function App() {
       <Header 
         theme={theme}
         toggleTheme={toggleTheme}
-        currentUser={currentUser}
-        onLogout={handleLogout}
+        currentUser={dbUser} // Use dbUser for alias and role
+        onLogout={logout}
       />
 
       {/* Main Study Workspace */}
@@ -105,37 +86,46 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home questions={questions} />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/login" element={<AuthPage />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            
             <Route 
               path="/practice" 
               element={
                 <FreePractice 
                   questions={questions} 
                   onFlagQuestion={handleFlagQuestion} 
-                  currentUser={currentUser} 
+                  currentUser={dbUser} 
                 />
               } 
             />
+            
             <Route 
               path="/dashboard" 
               element={
-                <UserDashboard 
-                  currentUser={currentUser} 
-                  questions={questions} 
-                  updateQuestions={updateQuestions} 
-                  onLoginSuccess={handleLoginSuccess}
-                />
+                currentUser ? (
+                  <UserDashboard 
+                    currentUser={dbUser} // Passing dbUser so dashboard has access to alias, role, email
+                    questions={questions} 
+                    updateQuestions={updateQuestions} 
+                  />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
               } 
             />
+            
             <Route 
               path="/admin" 
               element={
-                currentUser?.role === 'admin' ? (
+                dbUser?.role === 'admin' ? (
                   <AdminDashboard questions={questions} updateQuestions={updateQuestions} />
                 ) : (
                   <Navigate to="/dashboard" replace />
                 )
               } 
             />
+            
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         )}
@@ -146,4 +136,3 @@ export default function App() {
     </div>
   );
 }
-

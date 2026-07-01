@@ -104,7 +104,7 @@ export default function Header({ theme, toggleTheme, currentUser, onLogout }) {
                 }}
               >
                 <User size={14} style={{ color: 'var(--color-brand-secondary)' }} />
-                <span className="user-name-text" style={{ color: 'var(--color-text-main)' }}>{currentUser.displayName}</span>
+                <span className="user-name-text" style={{ color: 'var(--color-text-main)' }}>{currentUser.alias || currentUser.email?.split('@')[0]}</span>
               </div>
               <button 
                 className="btn btn-secondary btn-sm" 
@@ -117,11 +117,11 @@ export default function Header({ theme, toggleTheme, currentUser, onLogout }) {
             </div>
           ) : (
             <>
-              <button className="btn btn-secondary btn-sm" onClick={() => navigate('/dashboard?tab=login')}>
+              <button className="btn btn-secondary btn-sm" onClick={() => navigate('/login')}>
                 <LogIn size={16} />
                 <span>Sign In</span>
               </button>
-              <button className="btn btn-primary btn-sm" onClick={() => navigate('/dashboard?tab=register')}>
+              <button className="btn btn-primary btn-sm" onClick={() => navigate('/login')}>
                 <UserPlus size={16} />
                 <span>Register</span>
               </button>
