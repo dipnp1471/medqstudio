@@ -16,6 +16,8 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
   // Settings State
   const [newAlias, setNewAlias] = useState('');
   const [aliasSuccess, setAliasSuccess] = useState('');
+  const [isResettingStats, setIsResettingStats] = useState(false);
+  const [resetSuccess, setResetSuccess] = useState('');
 
   // Practice state
   const [selectedFilters, setSelectedFilters] = useState(['Clinical Problem Solving', 'Professional Dilemmas']);
@@ -194,6 +196,25 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
     }
   };
 
+  const handleResetStats = async () => {
+    if (!window.confirm("Are you sure you want to reset all your statistics? This cannot be undone.")) return;
+    setIsResettingStats(true);
+    try {
+      const resetStats = await db.resetUserStats(currentUser.email);
+      setStats(resetStats);
+      setResetSuccess("Statistics reset successfully!");
+      setTimeout(() => setResetSuccess(""), 3000);
+      
+      // Update the practice area if currently looking at it
+      selectQuestion(selectedFilters, selectedSpecialties, resetStats.history || []);
+    } catch (err) {
+      console.error("Failed to reset stats", err);
+      alert("Failed to reset statistics. Please try again.");
+    } finally {
+      setIsResettingStats(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="dashboard-container animate-fade" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
@@ -311,6 +332,39 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
                 <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--color-brand-secondary)' }}>{accuracy}%</div>
                 <div style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem', marginTop: '0.5rem' }}>Overall Accuracy</div>
               </div>
+            </div>
+
+            <div style={{ marginBottom: '3rem' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'var(--color-brand-primary)' }}>Topic Breakdown</h3>
+              {(!stats?.topicStats || Object.keys(stats.topicStats).length === 0) ? (
+                 <p style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>Answer some questions to see your topic breakdown.</p>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  {Object.entries(stats.topicStats).map(([topic, data]) => {
+                    const topicAccuracy = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+                    return (
+                      <div key={topic} style={{ padding: '1.25rem', backgroundColor: 'var(--color-bg)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                          <span style={{ fontWeight: '600' }}>{topic}</span>
+                          <span style={{ fontWeight: 'bold', color: topicAccuracy >= 70 ? 'var(--color-success)' : (topicAccuracy >= 40 ? 'var(--color-warning)' : 'var(--color-error)') }}>
+                            {topicAccuracy}% ({data.correct}/{data.total})
+                          </span>
+                        </div>
+                        <div style={{ width: '100%', height: '8px', backgroundColor: 'var(--color-border)', borderRadius: '4px', overflow: 'hidden' }}>
+                          <div 
+                            style={{ 
+                              width: `${topicAccuracy}%`, 
+                              height: '100%', 
+                              backgroundColor: topicAccuracy >= 70 ? 'var(--color-success)' : (topicAccuracy >= 40 ? 'var(--color-warning)' : 'var(--color-error)'),
+                              transition: 'width 0.5s ease-out'
+                            }} 
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             <div style={{ padding: '1.5rem', backgroundColor: 'var(--color-bg)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
@@ -476,7 +530,7 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
               <Settings size={24} style={{ color: 'var(--color-brand-secondary)' }} />
               Account Settings
             </h2>
-            <div style={{ maxWidth: '400px' }}>
+            <div style={{ maxWidth: '400px', marginBottom: '3rem' }}>
               {aliasSuccess && (
                 <div style={{ padding: '1rem', backgroundColor: 'var(--color-success-bg, #ecfdf5)', color: 'var(--color-success, #065f46)', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem', border: '1px solid var(--color-success-border, #a7f3d0)' }}>
                   {aliasSuccess}
@@ -501,6 +555,30 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
                   Save Settings
                 </button>
               </form>
+            </div>
+
+            <hr style={{ border: 'none', borderTop: '1px solid var(--color-border)', margin: '2rem 0' }} />
+            
+            <div>
+              <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: 'var(--color-error)' }}>
+                <AlertCircle size={20} /> Danger Zone
+              </h3>
+              <p style={{ color: 'var(--color-text-muted)', marginBottom: '1rem', fontSize: '0.9rem' }}>
+                Resetting your statistics will clear your history, total answered, and accuracy. This action cannot be undone.
+              </p>
+              {resetSuccess && (
+                <div style={{ padding: '1rem', backgroundColor: 'var(--color-success-bg, #ecfdf5)', color: 'var(--color-success, #065f46)', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem', border: '1px solid var(--color-success-border, #a7f3d0)' }}>
+                  {resetSuccess}
+                </div>
+              )}
+              <button 
+                onClick={handleResetStats}
+                disabled={isResettingStats}
+                className="btn" 
+                style={{ backgroundColor: 'var(--color-error)', color: 'white', opacity: isResettingStats ? 0.7 : 1 }}
+              >
+                {isResettingStats ? 'Resetting...' : 'Reset My Statistics'}
+              </button>
             </div>
           </div>
         )}

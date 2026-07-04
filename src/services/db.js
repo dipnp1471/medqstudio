@@ -207,6 +207,37 @@ export const db = {
     };
   },
 
+  resetUserStats: async (email) => {
+    const currentWeek = getCurrentWeek();
+    const { data: updated, error: updateError } = await supabase
+      .from('stats')
+      .update({
+        history: [],
+        total_answered: 0,
+        correct_answered: 0,
+        week_num: currentWeek,
+        weekly_correct: 0,
+        topic_stats: {}
+      })
+      .eq('email', email)
+      .select()
+      .single();
+
+    if (updateError) throw updateError;
+
+    return {
+      email: updated.email,
+      history: updated.history,
+      totalAnswered: updated.total_answered,
+      correctAnswered: updated.correct_answered,
+      weekNum: updated.week_num,
+      weeklyCorrect: updated.weekly_correct,
+      lastWinWeek: updated.last_win_week,
+      ratings: updated.ratings,
+      topicStats: updated.topic_stats
+    };
+  },
+
   rateQuestion: async (email, questionId, rating) => {
     const { data: userStats, error } = await supabase
       .from('stats')
