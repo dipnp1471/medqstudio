@@ -9,7 +9,7 @@ export default function HowItWorks() {
       <div className="info-page-header">
         <h1 className="info-page-title">How It Works</h1>
         <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto' }}>
-          The cognitive science and platform design principles behind our MSRA revision methodology.
+          Revision methodology based on high question volume.
         </p>
       </div>
 
@@ -38,7 +38,7 @@ export default function HowItWorks() {
             True efficiency comes from practicing what you *don't* know. In our unregistered free mode, you receive a completely randomized distribution of questions.
           </p>
           <p>
-            When you register a free account, our dashboard monitors your accuracy across the 12 clinical specialties. If you are consistently scoring 80% on *Cardiovascular* but struggling at 45% in *Paediatrics*, the system automatically recommends subtopic drills to patch your knowledge gaps.
+            When you register a free account, our dashboard monitors your accuracy across the 12 clinical specialties. Sign up to keep a track of how you're doing in each section.
           </p>
         </div>
 
@@ -88,12 +88,12 @@ export default function HowItWorks() {
         </div>
 
         {/* CTA Banner */}
-        <div 
-          className="card" 
-          style={{ 
-            textAlign: 'center', 
-            background: 'var(--color-brand-light)', 
-            border: '1px dashed var(--color-brand-secondary)' 
+        <div
+          className="card"
+          style={{
+            textAlign: 'center',
+            background: 'var(--color-brand-light)',
+            border: '1px dashed var(--color-brand-secondary)'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>

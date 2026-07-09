@@ -3606,5 +3606,510 @@ export const questions = [
     "blueprint_tag": "Clinical Problem Solving",
     "clinical_area": "Neurology",
     "status": "Active"
+  },
+  {
+    "id": 145,
+    "type": "Ranking",
+    "stem": "You notice that an FY1 colleague has made several prescribing errors over the past week. None of the errors have caused patient harm, as the pharmacists have caught them, but the colleague seems very stressed and tired. Rank the following actions.",
+    "options": [
+      "A. Speak to the colleague privately, expressing your concern for their wellbeing and discussing the errors.",
+      "B. Immediately report the colleague to the GMC for unsafe practice.",
+      "C. Inform your clinical supervisor about the errors so they can monitor the colleague's prescribing.",
+      "D. Suggest the colleague takes a few days of annual leave to rest.",
+      "E. Check all of the colleague's prescriptions yourself before they are sent to the pharmacy."
+    ],
+    "correct": [
+      "A. Speak to the colleague privately, expressing your concern for their wellbeing and discussing the errors.",
+      "C. Inform your clinical supervisor about the errors so they can monitor the colleague's prescribing.",
+      "D. Suggest the colleague takes a few days of annual leave to rest.",
+      "E. Check all of the colleague's prescriptions yourself before they are sent to the pharmacy.",
+      "B. Immediately report the colleague to the GMC for unsafe practice."
+    ],
+    "explanation": "Patient safety is paramount, but supporting a struggling colleague is also a professional duty. A supportive private conversation (A) is the best first step to understand the root cause (stress/tiredness). Informing a supervisor (C) ensures formal support and safety nets are in place. Suggesting leave (D) is supportive but doesn't address the immediate safety issue as well as A or C. Checking their prescriptions yourself (E) is unsustainable and hides the problem. Immediate GMC referral (B) is disproportionate for a local issue that hasn't caused harm and hasn't been escalated locally first.",
+    "topic": "Patient Safety",
+    "subtopic": "Colleague Wellbeing",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 146,
+    "type": "Ranking",
+    "stem": "A 45-year-old patient who is a devout Jehovah's Witness is admitted with a massive gastrointestinal bleed. They are fully conscious, have capacity, and refuse a life-saving blood transfusion. Rank the following actions.",
+    "options": [
+      "A. Respect the patient's decision, document it clearly, and provide the best alternative non-blood medical care.",
+      "B. Wait until the patient loses consciousness from blood loss, then give the transfusion under the principle of acting in their best interests.",
+      "C. Try to persuade the patient to accept the transfusion by repeatedly explaining that they will die without it.",
+      "D. Ask the hospital legal team to obtain an emergency court order to force the transfusion.",
+      "E. Refuse to treat the patient further unless they agree to the transfusion, as it compromises your medical ethics."
+    ],
+    "correct": [
+      "A. Respect the patient's decision, document it clearly, and provide the best alternative non-blood medical care.",
+      "C. Try to persuade the patient to accept the transfusion by repeatedly explaining that they will die without it.",
+      "D. Ask the hospital legal team to obtain an emergency court order to force the transfusion.",
+      "B. Wait until the patient loses consciousness from blood loss, then give the transfusion under the principle of acting in their best interests.",
+      "E. Refuse to treat the patient further unless they agree to the transfusion, as it compromises your medical ethics."
+    ],
+    "explanation": "A competent adult has the absolute right to refuse any medical treatment, even if that refusal results in death. You must respect their decision and offer alternative care (A). Ensuring they fully understand the consequences (C) is part of informed refusal, but must not cross into coercion. Seeking legal advice (D) is inappropriate for a competent adult but less egregious than assault. Transfusing them once unconscious (B) is battery, as their prior competent refusal stands. Refusing to treat them at all (E) is abandonment.",
+    "topic": "Consent",
+    "subtopic": "Refusal of Treatment",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 147,
+    "type": "Ranking",
+    "stem": "You are on a busy commuter train sitting behind two doctors from your hospital. They are discussing a complex case loudly, mentioning the patient's name, age, and diagnosis. Rank the following actions.",
+    "options": [
+      "A. Interrupt them politely, remind them they are in a public place, and ask them to stop discussing patient details.",
+      "B. Report them to the hospital's Caldicott Guardian or their clinical supervisor the next day.",
+      "C. Wait until they get off the train, follow them, and shout at them for breaching confidentiality.",
+      "D. Record their conversation on your phone as evidence for a formal complaint.",
+      "E. Move to another carriage so you don't have to listen to the breach."
+    ],
+    "correct": [
+      "A. Interrupt them politely, remind them they are in a public place, and ask them to stop discussing patient details.",
+      "B. Report them to the hospital's Caldicott Guardian or their clinical supervisor the next day.",
+      "E. Move to another carriage so you don't have to listen to the breach.",
+      "D. Record their conversation on your phone as evidence for a formal complaint.",
+      "C. Wait until they get off the train, follow them, and shout at them for breaching confidentiality."
+    ],
+    "explanation": "Confidentiality is a core pillar of medical practice. The most immediate and effective way to protect the patient is to stop the breach happening right now by politely interrupting (A). If they don't stop, or if the breach was severe, reporting it formally (B) is required. Ignoring it by moving (E) fails to protect the patient. Surreptitiously recording them (D) is legally dubious and unprofessional. Aggressive confrontation (C) is always inappropriate.",
+    "topic": "Confidentiality",
+    "subtopic": "Public Spaces",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 148,
+    "type": "Ranking",
+    "stem": "You are the night SHO. You are asked to review an elderly, frail patient who is deteriorating. The consultant's documented plan from the day is 'for full escalation and CPR'. You strongly believe CPR would be futile and cruel. Rank the following actions.",
+    "options": [
+      "A. Review the patient, provide optimal ward-based medical therapy, and contact the on-call medical consultant to discuss your concerns about the CPR status.",
+      "B. Unilaterally write a DNACPR (Do Not Attempt CPR) form and cancel the consultant's plan.",
+      "C. Discuss the situation with the patient's family in the middle of the night to ask them to agree to a DNACPR.",
+      "D. Ignore your concerns and follow the consultant's documented plan without question.",
+      "E. Refuse to treat the patient, stating you disagree with the management plan."
+    ],
+    "correct": [
+      "A. Review the patient, provide optimal ward-based medical therapy, and contact the on-call medical consultant to discuss your concerns about the CPR status.",
+      "D. Ignore your concerns and follow the consultant's documented plan without question.",
+      "C. Discuss the situation with the patient's family in the middle of the night to ask them to agree to a DNACPR.",
+      "B. Unilaterally write a DNACPR (Do Not Attempt CPR) form and cancel the consultant's plan.",
+      "E. Refuse to treat the patient, stating you disagree with the management plan."
+    ],
+    "explanation": "When disagreeing with a senior's plan, especially regarding life-sustaining treatment, communication is key. The safest approach is to escalate your concerns to the on-call senior while continuing optimal care (A). Blindly following a plan you feel is harmful is poor practice (D), but safer than acting unilaterally. Waking the family for a sudden DNACPR discussion (C) is inappropriate unless the patient is actively dying right then. Unilaterally overriding a consultant's clear, documented plan as a junior (B) is dangerous and unprofessional. Abandoning the patient (E) is never acceptable.",
+    "topic": "Professionalism",
+    "subtopic": "Clinical Disagreements",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 149,
+    "type": "Ranking",
+    "stem": "A patient's relative is on the ward, shouting aggressively at the nursing staff because the patient's lunch is late. They are swearing, throwing magazines, and invading the nurses' personal space. Rank the following actions.",
+    "options": [
+      "A. Call hospital security immediately to intervene and protect the staff.",
+      "B. Step between the relative and the nurses, asking the relative calmly to step into a quiet room to discuss their concerns.",
+      "C. Shout back at the relative, telling them they will be thrown out if they don't stop.",
+      "D. Tell the nurses to hide in the staff room and lock the door until the relative leaves.",
+      "E. Ignore the situation, as it is a nursing issue and you are busy."
+    ],
+    "correct": [
+      "A. Call hospital security immediately to intervene and protect the staff.",
+      "B. Step between the relative and the nurses, asking the relative calmly to step into a quiet room to discuss their concerns.",
+      "D. Tell the nurses to hide in the staff room and lock the door until the relative leaves.",
+      "C. Shout back at the relative, telling them they will be thrown out if they don't stop.",
+      "E. Ignore the situation, as it is a nursing issue and you are busy."
+    ],
+    "explanation": "Staff safety is the absolute priority in violent or highly aggressive situations. With physical intimidation and throwing objects, professional security is required immediately (A). De-escalation (B) can be attempted if safe, but putting yourself in physical danger is risky. Retreating to a safe room (D) protects staff but leaves the ward unmanaged. Aggression (C) inflames the situation. Ignoring violence against colleagues (E) is completely unacceptable.",
+    "topic": "Professionalism",
+    "subtopic": "Managing Aggression",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 150,
+    "type": "MultipleChoice",
+    "stem": "You are assessing a 3-year-old child in the Emergency Department who presents with a spiral fracture of the femur. The parents claim the child simply tripped while running on a carpet. You suspect non-accidental injury (NAI). Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Immediately confront the parents, accusing them of child abuse.",
+      "B. Ensure the child is admitted to the paediatric ward for safety and further medical management.",
+      "C. Discuss the case with the consultant paediatrician on call or the named doctor for safeguarding.",
+      "D. Document the parents' explanation verbatim in the medical notes alongside your objective clinical findings.",
+      "E. Ask the parents to leave the room so you can aggressively interrogate the 3-year-old.",
+      "F. Discharge the child with a cast, as the parents seem like nice people.",
+      "G. Tell the police to arrest the parents in the waiting room.",
+      "H. Refuse to treat the fracture until social services arrive."
+    ],
+    "correct": [
+      "B. Ensure the child is admitted to the paediatric ward for safety and further medical management.",
+      "C. Discuss the case with the consultant paediatrician on call or the named doctor for safeguarding.",
+      "D. Document the parents' explanation verbatim in the medical notes alongside your objective clinical findings."
+    ],
+    "explanation": "A spiral femur fracture in a toddler from a low-impact fall is highly suspicious for NAI. The priority is the child's safety, which is ensured by admitting them (B). You must follow safeguarding protocols by discussing with a senior/safeguarding lead (C). Accurate, objective documentation, including exactly what the parents said, is crucial for any future investigation (D). Confronting the parents (A) or calling the police directly (G) can compromise the investigation or cause them to flee with the child. Withholding medical treatment (H) is unethical.",
+    "topic": "Safeguarding",
+    "subtopic": "Non-Accidental Injury (Child)",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 151,
+    "type": "MultipleChoice",
+    "stem": "You discover that a senior registrar is secretly engaged in an intimate, sexual relationship with a vulnerable psychiatric inpatient under their direct care. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Confront the registrar privately and tell them to end the relationship immediately.",
+      "B. Report the registrar to the clinical director or medical director of the hospital.",
+      "C. Report the registrar to the General Medical Council (GMC).",
+      "D. Interview the vulnerable patient yourself to gather evidence of the relationship.",
+      "E. Keep the information secret, as you do not want to ruin the registrar's career.",
+      "F. Discuss the situation openly in the doctors' mess to see what others think.",
+      "G. Ensure the patient's care is immediately transferred to a different clinical team.",
+      "H. Blackmail the registrar into doing your on-call shifts."
+    ],
+    "correct": [
+      "B. Report the registrar to the clinical director or medical director of the hospital.",
+      "C. Report the registrar to the General Medical Council (GMC).",
+      "G. Ensure the patient's care is immediately transferred to a different clinical team."
+    ],
+    "explanation": "Having an intimate relationship with a current, vulnerable patient is an egregious breach of trust and a severe probity issue that almost guarantees erasure from the medical register. It must be formally escalated to hospital management (B) and the GMC (C). The patient's safety is paramount, so transferring their care is essential (G). Handling this privately (A) or keeping it secret (E) is a failure of your duty to protect patients. Investigating it yourself (D) is outside your remit.",
+    "topic": "Probity",
+    "subtopic": "Professional Boundaries",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 152,
+    "type": "MultipleChoice",
+    "stem": "A very grateful, wealthy patient who is being discharged after a long admission tries to hand you an envelope containing £500 in cash as a 'thank you' for your care. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Politely decline the cash, explaining that doctors cannot accept significant financial gifts from patients.",
+      "B. Suggest that if they wish to show gratitude, they could make a donation to the hospital charity instead.",
+      "C. Accept the money, but secretly distribute it among the nursing staff.",
+      "D. Accept the money and spend it on a holiday, as you worked hard for it.",
+      "E. Ensure you document the offer and your refusal in the patient's medical notes or declare it on the hospital's gift register if required by trust policy.",
+      "F. Tell the patient they are attempting to bribe you and discharge them immediately.",
+      "G. Take the money but give it directly to the hospital management without telling the patient.",
+      "H. Accept the money but promise the patient preferential treatment if they are readmitted."
+    ],
+    "correct": [
+      "A. Politely decline the cash, explaining that doctors cannot accept significant financial gifts from patients.",
+      "B. Suggest that if they wish to show gratitude, they could make a donation to the hospital charity instead.",
+      "E. Ensure you document the offer and your refusal in the patient's medical notes or declare it on the hospital's gift register if required by trust policy."
+    ],
+    "explanation": "GMC guidance states doctors must not accept gifts that could affect or be seen to affect their professional judgement. Cash of significant value should always be declined (A). Redirecting to a hospital charity is a professional alternative (B). Transparency is key, so declaring the offer on a register or in notes protects you from allegations of bribery (E). Accepting the cash (C, D, H) is a severe probity breach.",
+    "topic": "Probity",
+    "subtopic": "Gifts from Patients",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 153,
+    "type": "MultipleChoice",
+    "stem": "You are a surgical core trainee. Due to extreme fatigue and a chaotic theatre list, you mistakenly perform a minor excision on the wrong side of a patient's body under local anaesthetic. The patient has not yet noticed. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Speak to the patient immediately, explain the error fully, apologize, and outline the next steps for correction.",
+      "B. Inform your consultant surgeon immediately about the 'Never Event' (wrong-site surgery).",
+      "C. Complete a formal clinical incident report (Datix).",
+      "D. Quickly inject more local anaesthetic and perform the excision on the correct side before the patient notices.",
+      "E. Alter the original consent form to make it look like the patient agreed to bilateral excisions.",
+      "F. Blame the theatre nurses for setting up the equipment on the wrong side of the bed.",
+      "G. Tell the patient you found an unexpected abnormality on the other side that needed urgent removal.",
+      "H. Resign from your job immediately to avoid an investigation."
+    ],
+    "correct": [
+      "A. Speak to the patient immediately, explain the error fully, apologize, and outline the next steps for correction.",
+      "B. Inform your consultant surgeon immediately about the 'Never Event' (wrong-site surgery).",
+      "C. Complete a formal clinical incident report (Datix)."
+    ],
+    "explanation": "Wrong-site surgery is a 'Never Event'. You must enact the Duty of Candour by being open, honest, and apologizing to the patient immediately (A). As a junior, you must inform your consultant immediately (B) and complete institutional reporting (C) to trigger a systemic investigation. Covering it up (D), forging documents (E), blaming others (F), or lying to the patient (G) turn a tragic clinical error into a career-ending probity violation.",
+    "topic": "Patient Safety",
+    "subtopic": "Never Events & Duty of Candour",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 154,
+    "type": "MultipleChoice",
+    "stem": "You are a GP trainee. A 25-year-old patient you have seen a few times for minor ailments asks for your Instagram handle at the end of a consultation, stating they 'think you are really cool and would love to hang out'. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Politely decline, explaining that GMC guidelines prohibit social relationships between doctors and their current patients.",
+      "B. Document the interaction objectively in the patient's medical records.",
+      "C. Ensure all your social media profiles are set to private so patients cannot easily find you.",
+      "D. Give them a fake Instagram handle to avoid an awkward confrontation.",
+      "E. Accept their follow request, but promise yourself you won't message them.",
+      "F. Tell them to wait until they are no longer registered at your practice, then ask you again.",
+      "G. Start shouting at the patient for making you feel uncomfortable.",
+      "H. Report the patient to the police for stalking."
+    ],
+    "correct": [
+      "A. Politely decline, explaining that GMC guidelines prohibit social relationships between doctors and their current patients.",
+      "B. Document the interaction objectively in the patient's medical records.",
+      "C. Ensure all your social media profiles are set to private so patients cannot easily find you."
+    ],
+    "explanation": "Maintaining clear professional boundaries is essential. You must politely but firmly decline social/personal contact with patients (A). Documenting the interaction protects you if the patient's behaviour escalates (B). Maintaining strict privacy settings on personal social media is a core recommendation for all doctors (C). Lying (D) or accepting the request (E) blurs boundaries. Hinting at a future relationship (F) is also inappropriate.",
+    "topic": "Professionalism",
+    "subtopic": "Social Media & Boundaries",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 155,
+    "type": "SBA",
+    "stem": "A 28-year-old man with a known history of Bipolar Affective Disorder is brought to A&E by police. He is agitated, speaking rapidly, claims he has discovered a cure for cancer, and hasn't slept in 4 days. He is currently not on any regular medication. What is the most appropriate first-line pharmacological treatment for his acute manic episode?",
+    "options": [
+      "Lithium",
+      "Olanzapine",
+      "Fluoxetine",
+      "Diazepam",
+      "Lamotrigine"
+    ],
+    "correct": "Olanzapine",
+    "explanation": "For acute mania, antipsychotics (like Olanzapine, Quetiapine, or Risperidone) are the first-line treatment because they act rapidly to control psychotic symptoms and agitation. Lithium is used as a mood stabilizer for long-term prophylaxis, but takes too long to work in an acute episode. Fluoxetine (antidepressant) can worsen mania.",
+    "topic": "Psychiatry",
+    "subtopic": "Bipolar Disorder",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Psychiatry",
+    "status": "Active"
+  },
+  {
+    "id": 156,
+    "type": "SBA",
+    "stem": "A 6-month-old infant is brought to the GP in December with a 3-day history of coryza, followed by a dry cough and increasing breathlessness. On examination, the infant has subcostal recessions, an expiratory wheeze, and fine bilateral inspiratory crackles. What is the most likely diagnosis?",
+    "options": [
+      "Asthma",
+      "Croup",
+      "Bronchiolitis",
+      "Pneumonia",
+      "Epiglottitis"
+    ],
+    "correct": "Bronchiolitis",
+    "explanation": "Coryzal symptoms followed by respiratory distress, wheeze, and fine crackles in an infant (under 1 year) during winter is the classic presentation of bronchiolitis, most commonly caused by Respiratory Syncytial Virus (RSV). Asthma is rarely diagnosed under age 1. Croup presents with a barking cough and stridor.",
+    "topic": "Paediatrics",
+    "subtopic": "Respiratory",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Paediatrics",
+    "status": "Active"
+  },
+  {
+    "id": 157,
+    "type": "SBA",
+    "stem": "A 22-year-old university student presents with intense, generalized itching that is worse at night. On examination, there are excoriated erythematous papules on the abdomen and linear burrows visible in the web spaces of the fingers. What is the most appropriate first-line treatment?",
+    "options": [
+      "Topical hydrocortisone 1%",
+      "Oral cetirizine",
+      "Topical permethrin 5% cream",
+      "Oral ivermectin",
+      "Topical clotrimazole cream"
+    ],
+    "correct": "Topical permethrin 5% cream",
+    "explanation": "Intense nocturnal itching with burrows in the finger webs is classic for scabies. The first-line treatment is topical permethrin 5% cream, applied to the entire body from the neck down, washed off after 8-12 hours, and repeated after 7 days. Close contacts should be treated simultaneously.",
+    "topic": "Dermatology",
+    "subtopic": "Infectious Dermatoses",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Dermatology",
+    "status": "Active"
+  },
+  {
+    "id": 158,
+    "type": "SBA",
+    "stem": "A 45-year-old woman, who is overweight, presents to A&E with severe, constant right upper quadrant abdominal pain radiating to her right shoulder. She is pyrexial (38.2°C) and has a positive Murphy's sign on examination. What is the most appropriate initial imaging investigation to confirm the diagnosis?",
+    "options": [
+      "CT Abdomen with contrast",
+      "MRI Abdomen",
+      "Plain abdominal X-ray",
+      "Ultrasound abdomen",
+      "ERCP"
+    ],
+    "correct": "Ultrasound abdomen",
+    "explanation": "The clinical picture (fever, RUQ pain, positive Murphy's sign) strongly suggests acute cholecystitis. The most appropriate first-line imaging modality is a transabdominal ultrasound, which is highly sensitive for detecting gallstones, gallbladder wall thickening, and pericholecystic fluid.",
+    "topic": "Surgery",
+    "subtopic": "Biliary Disease",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Gastroenterology",
+    "status": "Active"
+  },
+  {
+    "id": 159,
+    "type": "SBA",
+    "stem": "A 32-year-old woman presents with profound fatigue, weight loss, and dizziness on standing. On examination, she is hypotensive (90/60 mmHg) and has hyperpigmentation in her palmar creases and buccal mucosa. Blood tests show hyponatraemia and hyperkalaemia. What is the most likely diagnosis?",
+    "options": [
+      "Cushing's syndrome",
+      "Conn's syndrome",
+      "Addison's disease",
+      "Hypothyroidism",
+      "Phaeochromocytoma"
+    ],
+    "correct": "Addison's disease",
+    "explanation": "Addison's disease (primary adrenal insufficiency) results in cortisol and aldosterone deficiency. Aldosterone deficiency causes hyponatraemia, hyperkalaemia, and hypotension. The lack of cortisol removes negative feedback, leading to high ACTH levels, which causes the classic mucosal and skin crease hyperpigmentation.",
+    "topic": "Endocrinology",
+    "subtopic": "Adrenal Gland Disorders",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Endocrinology",
+    "status": "Active"
+  },
+  {
+    "id": 160,
+    "type": "EMQ",
+    "theme": "Asthma Management",
+    "stem": "For each patient with asthma, select the most appropriate next step in their chronic management according to BTS/SIGN guidelines. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Short-acting beta-2 agonist (SABA) inhaler as required",
+      "B. Low-dose inhaled corticosteroid (ICS)",
+      "C. Add an inhaled Long-Acting Beta Agonist (LABA)",
+      "D. Add an oral Leukotriene Receptor Antagonist (LTRA)",
+      "E. Add oral Prednisolone"
+    ],
+    "scenarios": [
+      {
+        "id": "160a",
+        "text": "A 24-year-old man who currently uses a SABA inhaler 4 times a week for wheeze and is occasionally woken at night by a cough.",
+        "correct": "B. Low-dose inhaled corticosteroid (ICS)"
+      },
+      {
+        "id": "160b",
+        "text": "A 30-year-old woman who is already taking a low-dose ICS and using a SABA, but remains symptomatic, waking up twice a week breathless.",
+        "correct": "C. Add an inhaled Long-Acting Beta Agonist (LABA)"
+      }
+    ],
+    "explanation": "If a patient uses a SABA >3 times a week or has night-time symptoms, step 2 is to add a low-dose ICS preventer (Scenario A). If they remain symptomatic on a low-dose ICS, the next step (Step 3) is usually to add an inhaled LABA (Scenario B). Note: NICE guidance suggests LTRA before LABA, but BTS/SIGN traditionally suggests LABA. Both are acceptable second-line preventers.",
+    "topic": "Respiratory",
+    "subtopic": "Asthma",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Respiratory",
+    "status": "Active"
+  },
+  {
+    "id": 161,
+    "type": "EMQ",
+    "theme": "Cardiac Murmurs",
+    "stem": "For each clinical description, select the most likely valvular abnormality. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Aortic Stenosis",
+      "B. Aortic Regurgitation",
+      "C. Mitral Stenosis",
+      "D. Mitral Regurgitation",
+      "E. Tricuspid Regurgitation"
+    ],
+    "scenarios": [
+      {
+        "id": "161a",
+        "text": "A 75-year-old man presenting with exertional syncope. On auscultation, there is an ejection systolic murmur radiating to the carotids, and a narrow pulse pressure.",
+        "correct": "A. Aortic Stenosis"
+      },
+      {
+        "id": "161b",
+        "text": "A 60-year-old woman presenting with shortness of breath. On auscultation, there is a pansystolic murmur heard loudest at the apex, radiating to the axilla.",
+        "correct": "D. Mitral Regurgitation"
+      }
+    ],
+    "explanation": "An ejection systolic murmur radiating to the carotids with a narrow pulse pressure and symptoms of SAD (Syncope, Angina, Dyspnoea) is classic Aortic Stenosis. A pansystolic murmur at the apex radiating to the axilla is the classic presentation of Mitral Regurgitation.",
+    "topic": "Cardiovascular",
+    "subtopic": "Valvular Heart Disease",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Cardiovascular",
+    "status": "Active"
+  },
+  {
+    "id": 162,
+    "type": "EMQ",
+    "theme": "Dysphagia",
+    "stem": "For each patient presenting with difficulty swallowing, select the most likely underlying diagnosis. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Achalasia",
+      "B. Oesophageal carcinoma",
+      "C. Pharyngeal pouch (Zenker's diverticulum)",
+      "D. Myasthenia gravis",
+      "E. Oesophageal candidiasis"
+    ],
+    "scenarios": [
+      {
+        "id": "162a",
+        "text": "A 68-year-old man who smokes heavily complains of progressive dysphagia, initially to solids, and now to liquids, accompanied by a 10kg weight loss over 3 months.",
+        "correct": "B. Oesophageal carcinoma"
+      },
+      {
+        "id": "162b",
+        "text": "A 40-year-old woman presents with long-standing dysphagia to both solids and liquids simultaneously, accompanied by regurgitation of undigested food and a barium swallow showing a 'bird's beak' appearance.",
+        "correct": "A. Achalasia"
+      }
+    ],
+    "explanation": "Progressive dysphagia (solids then liquids) with 'red flags' like significant weight loss and a smoking history strongly points to a mechanical obstruction like oesophageal malignancy. Dysphagia to both solids and liquids simultaneously from the onset, with a 'bird's beak' on imaging (due to failure of the lower oesophageal sphincter to relax), is classic for achalasia.",
+    "topic": "Gastroenterology",
+    "subtopic": "Oesophageal Disease",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Gastroenterology",
+    "status": "Active"
+  },
+  {
+    "id": 163,
+    "type": "EMQ",
+    "theme": "Types of Miscarriage",
+    "stem": "For each pregnant patient (under 24 weeks gestation) presenting with bleeding, select the most accurate diagnosis based on the clinical and ultrasound findings. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Threatened miscarriage",
+      "B. Inevitable miscarriage",
+      "C. Incomplete miscarriage",
+      "D. Complete miscarriage",
+      "E. Missed (delayed) miscarriage"
+    ],
+    "scenarios": [
+      {
+        "id": "163a",
+        "text": "A woman at 8 weeks gestation has light vaginal bleeding but no pain. The cervical os is closed. Ultrasound shows a viable intrauterine pregnancy with a fetal heartbeat.",
+        "correct": "A. Threatened miscarriage"
+      },
+      {
+        "id": "163b",
+        "text": "A woman at 10 weeks gestation attends a routine scan. She has had no bleeding or pain. The cervical os is closed. Ultrasound shows a fetal pole measuring 15mm with no cardiac activity.",
+        "correct": "E. Missed (delayed) miscarriage"
+      }
+    ],
+    "explanation": "Bleeding with a closed cervix and a viable fetus is a threatened miscarriage. A pregnancy that has failed (no fetal heart beat on US) but has not yet been expelled by the body, with a closed cervix and often no symptoms, is a missed (or delayed) miscarriage.",
+    "topic": "Obstetrics & Gynaecology",
+    "subtopic": "Early Pregnancy Complications",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Reproductive",
+    "status": "Active"
+  },
+  {
+    "id": 164,
+    "type": "EMQ",
+    "theme": "Tremors",
+    "stem": "For each patient presenting with a tremor, select the most likely underlying diagnosis. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Parkinson's disease",
+      "B. Essential tremor",
+      "C. Cerebellar lesion",
+      "D. Hyperthyroidism",
+      "E. Alcohol withdrawal"
+    ],
+    "scenarios": [
+      {
+        "id": "164a",
+        "text": "A 65-year-old man presents with an asymmetrical 'pill-rolling' tremor in his hands that is most prominent when he is resting and disappears when he reaches for an object.",
+        "correct": "A. Parkinson's disease"
+      },
+      {
+        "id": "164b",
+        "text": "A 40-year-old woman presents with a bilateral hand tremor that is most noticeable when she tries to hold a cup of tea. She notes that her father had a similar tremor, and it improves slightly if she drinks a glass of wine.",
+        "correct": "B. Essential tremor"
+      }
+    ],
+    "explanation": "An asymmetrical resting 'pill-rolling' tremor is the classic presentation of Parkinson's disease. A symmetrical postural/action tremor (worse when holding objects/doing tasks) that has a family history and is relieved by alcohol is the classic presentation of an essential tremor.",
+    "topic": "Neurology",
+    "subtopic": "Movement Disorders",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Neurology",
+    "status": "Active"
   }
 ];
