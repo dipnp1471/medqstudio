@@ -20,7 +20,7 @@ export default function Home({ questions }) {
             <Play size={18} strokeWidth={2.5} />
             <span>Try Free Practice Mode</span>
           </button>
-          <button className="btn btn-secondary" onClick={() => navigate('/dashboard?tab=register')}>
+          <button className="btn btn-secondary" onClick={() => navigate('/login?tab=register')}>
             <UserCheck size={18} />
             <span>Create Free Account</span>
           </button>
@@ -111,7 +111,7 @@ export default function Home({ questions }) {
             </button>
             <button
               className="btn btn-outline"
-              onClick={() => navigate('/dashboard?tab=register')}
+              onClick={() => navigate('/login?tab=register')}
               style={{ color: 'var(--color-brand-primary)', borderColor: 'var(--color-brand-primary)' }}
             >
               Sign Up for Progress Tracking

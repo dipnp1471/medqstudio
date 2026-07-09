@@ -107,7 +107,7 @@ export default function HowItWorks() {
             <button className="btn btn-primary" onClick={() => navigate('/practice')}>
               Access Free Practice Mode
             </button>
-            <button className="btn btn-secondary" onClick={() => navigate('/dashboard?tab=register')}>
+            <button className="btn btn-secondary" onClick={() => navigate('/login?tab=register')}>
               Create Free Account
             </button>
           </div>

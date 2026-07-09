@@ -117,11 +117,11 @@ export default function Header({ theme, toggleTheme, currentUser, onLogout }) {
             </div>
           ) : (
             <>
-              <button className="btn btn-secondary btn-sm" onClick={() => navigate('/login')}>
+              <button className="btn btn-secondary btn-sm" onClick={() => navigate('/login?tab=login')}>
                 <LogIn size={16} />
                 <span>Sign In</span>
               </button>
-              <button className="btn btn-primary btn-sm" onClick={() => navigate('/login')}>
+              <button className="btn btn-primary btn-sm" onClick={() => navigate('/login?tab=register')}>
                 <UserPlus size={16} />
                 <span>Register</span>
               </button>

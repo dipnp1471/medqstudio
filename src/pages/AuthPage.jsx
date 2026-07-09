@@ -1,12 +1,21 @@
 import { useState } from 'react';
 import { supabase } from '../services/supabase';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Navigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function AuthPage() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(true);
+  const [searchParams] = useSearchParams();
+  const tab = searchParams.get('tab');
+  
+  const [isLogin, setIsLogin] = useState(() => tab !== 'register');
+  const [prevTab, setPrevTab] = useState(tab);
+
+  if (tab !== prevTab) {
+    setPrevTab(tab);
+    setIsLogin(tab !== 'register');
+  }
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');

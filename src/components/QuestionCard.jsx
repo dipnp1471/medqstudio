@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Check, X, AlertCircle, Flag, HelpCircle, Star, MessageSquare } from 'lucide-react';
 import { db } from '../services/db';
 
-export default function QuestionCard({ question, onAnswerSubmit, onNextQuestion, onOpenAuth, onFlagQuestion, currentUser }) {
+export default function QuestionCard({ question, onAnswerSubmit, onNextQuestion, onOpenAuth, onFlagQuestion, currentUser, isLastInSet }) {
   // Common state
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isCorrectOverall, setIsCorrectOverall] = useState(false);
@@ -385,7 +385,7 @@ export default function QuestionCard({ question, onAnswerSubmit, onNextQuestion,
             onClick={onNextQuestion}
             style={{ minWidth: '150px' }}
           >
-            Next Question
+            {isLastInSet ? 'Finish Practice Set' : 'Next Question'}
           </button>
         )}
       </div>
