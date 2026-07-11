@@ -393,13 +393,13 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
                       }))}
                       margin={{ top: 20, right: 30, left: -20, bottom: 50 }}
                     >
-                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
-                      <XAxis dataKey="name" tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} angle={-45} textAnchor="end" height={60} />
-                      <YAxis tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} tickFormatter={(val) => `${val}%`} />
-                      <Tooltip contentStyle={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)', borderRadius: '8px' }} itemStyle={{ fontWeight: 'bold' }} />
-                      <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '14px' }} />
-                      <Bar dataKey="You" fill="var(--color-brand-secondary)" radius={[4, 4, 0, 0]} barSize={20} />
-                      <Bar dataKey="Global" fill="var(--color-brand-light)" stroke="var(--color-brand-primary)" radius={[4, 4, 0, 0]} barSize={20} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} horizontal={false} />
+                      <XAxis dataKey="name" tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} angle={-45} textAnchor="end" height={60} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} tickFormatter={(val) => `${val}%`} axisLine={false} tickLine={false} />
+                      <Tooltip cursor={{ fill: 'transparent' }} contentStyle={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }} itemStyle={{ fontWeight: 'bold' }} />
+                      <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', opacity: 0.8 }} />
+                      <Bar dataKey="You" fill="var(--color-brand-secondary)" radius={[4, 4, 0, 0]} barSize={20} isAnimationActive={false} />
+                      <Bar dataKey="Global" fill="var(--color-border)" radius={[4, 4, 0, 0]} barSize={20} isAnimationActive={false} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -448,13 +448,13 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
                       }))}
                       margin={{ top: 20, right: 30, left: -20, bottom: 20 }}
                     >
-                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
-                      <XAxis dataKey="date" tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} />
-                      <YAxis tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} allowDecimals={false} />
-                      <Tooltip contentStyle={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)', borderRadius: '8px' }} />
-                      <Legend verticalAlign="top" height={36} />
-                      <Line type="monotone" dataKey="Correct Answers" stroke="var(--color-success)" strokeWidth={3} dot={{ r: 4, fill: 'var(--color-success)', strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                      <Line type="monotone" dataKey="Total Attempted" stroke="var(--color-text-muted)" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3, fill: 'var(--color-text-muted)' }} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} horizontal={false} />
+                      <XAxis dataKey="date" tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} allowDecimals={false} axisLine={false} tickLine={false} />
+                      <Tooltip cursor={false} contentStyle={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }} />
+                      <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', opacity: 0.8 }} />
+                      <Line type="monotone" dataKey="Correct Answers" stroke="var(--color-success)" strokeWidth={2} dot={false} activeDot={{ r: 4 }} isAnimationActive={false} />
+                      <Line type="monotone" dataKey="Total Attempted" stroke="var(--color-text-muted)" strokeWidth={2} strokeDasharray="4 4" dot={false} activeDot={false} isAnimationActive={false} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
