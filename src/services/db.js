@@ -5,6 +5,23 @@ export const getCurrentWeek = () => {
   return Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
 };
 
+export const getDayString = (date = new Date()) => {
+  return date.toISOString().split('T')[0];
+};
+
+export const getMonthString = (date = new Date()) => {
+  return date.toISOString().slice(0, 7);
+};
+
+export const getWeekString = (date = new Date()) => {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+  return `${d.getUTCFullYear()}-W${weekNo.toString().padStart(2, '0')}`;
+};
+
 // API
 export const db = {
   // --- USERS ---
@@ -158,10 +175,10 @@ export const db = {
       weeklyCorrect += 1;
     }
 
-    // Fetch the question's tag to update topic stats
+    // Fetch the question's tag and clinical area to update topic stats
     const { data: question } = await supabase
       .from('questions')
-      .select('blueprint_tag')
+      .select('blueprint_tag, clinical_area')
       .eq('id', questionId)
       .maybeSingle();
 
@@ -175,6 +192,44 @@ export const db = {
       if (isCorrect) {
         topicStats[tag].correct += 1;
       }
+    }
+
+    if (question && question.clinical_area) {
+      if (!topicStats['__specialties']) topicStats['__specialties'] = {};
+      const area = question.clinical_area;
+      if (!topicStats['__specialties'][area]) {
+        topicStats['__specialties'][area] = { total: 0, correct: 0 };
+      }
+      topicStats['__specialties'][area].total += 1;
+      if (isCorrect) {
+        topicStats['__specialties'][area].correct += 1;
+      }
+    }
+
+    if (!topicStats['__timeline']) {
+      topicStats['__timeline'] = { days: {}, weeks: {}, months: {} };
+    }
+    ['days', 'weeks', 'months'].forEach(type => {
+      if (!topicStats['__timeline'][type]) topicStats['__timeline'][type] = {};
+    });
+
+    const timeline = topicStats['__timeline'];
+    const dayStr = getDayString();
+    const weekStr = getWeekString();
+    const monthStr = getMonthString();
+
+    if (!timeline.days[dayStr]) timeline.days[dayStr] = { total: 0, correct: 0 };
+    if (!timeline.weeks[weekStr]) timeline.weeks[weekStr] = { total: 0, correct: 0 };
+    if (!timeline.months[monthStr]) timeline.months[monthStr] = { total: 0, correct: 0 };
+
+    timeline.days[dayStr].total += 1;
+    timeline.weeks[weekStr].total += 1;
+    timeline.months[monthStr].total += 1;
+
+    if (isCorrect) {
+      timeline.days[dayStr].correct += 1;
+      timeline.weeks[weekStr].correct += 1;
+      timeline.months[monthStr].correct += 1;
     }
 
     // Save updated stats back to DB
@@ -273,6 +328,36 @@ export const db = {
       ratings: s.ratings || {},
       topicStats: s.topic_stats || {}
     }));
+  },
+
+  getGlobalSpecialtyAverages: async () => {
+    const { data: allStats, error } = await supabase
+      .from('stats')
+      .select('topic_stats');
+      
+    if (error) throw error;
+    
+    const globalAggregates = {};
+    
+    allStats.forEach(stat => {
+      const specialties = stat.topic_stats?.['__specialties'] || {};
+      Object.entries(specialties).forEach(([area, data]) => {
+        if (!globalAggregates[area]) {
+          globalAggregates[area] = { total: 0, correct: 0 };
+        }
+        globalAggregates[area].total += data.total;
+        globalAggregates[area].correct += data.correct;
+      });
+    });
+    
+    const globalAverages = {};
+    Object.entries(globalAggregates).forEach(([area, data]) => {
+      if (data.total > 0) {
+        globalAverages[area] = Math.round((data.correct / data.total) * 100);
+      }
+    });
+    
+    return globalAverages;
   },
 
   // --- LEADERBOARD ---

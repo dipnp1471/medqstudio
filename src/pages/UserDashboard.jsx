@@ -3,6 +3,7 @@ import QuestionCard from '../components/QuestionCard';
 import { db } from '../services/db';
 import { Trophy, Activity, Edit3, Target, CheckCircle, BarChart3, AlertCircle, HelpCircle, X, Settings } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
 
 export default function UserDashboard({ currentUser, questions, updateQuestions }) {
   const { updateAlias } = useAuth();
@@ -12,6 +13,10 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
   const [leaderboard, setLeaderboard] = useState([]);
   const [hasSubmitPrivilege, setHasSubmitPrivilege] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // New Stats State
+  const [globalAverages, setGlobalAverages] = useState({});
+  const [timeFilter, setTimeFilter] = useState('days'); // 'days', 'weeks', 'months'
 
   // Settings State
   const [newAlias, setNewAlias] = useState('');
@@ -74,6 +79,9 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
       try {
         const userStats = await db.getUserStats(currentUser.email);
         setStats(userStats);
+
+        const gAverages = await db.getGlobalSpecialtyAverages();
+        setGlobalAverages(gAverages);
 
         const board = await db.getLeaderboard();
         setLeaderboard(board);
@@ -340,7 +348,9 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
                  <p style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>Answer some questions to see your topic breakdown.</p>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                  {Object.entries(stats.topicStats).map(([topic, data]) => {
+                  {Object.entries(stats.topicStats)
+                    .filter(([topic]) => !topic.startsWith('__'))
+                    .map(([topic, data]) => {
                     const topicAccuracy = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
                     return (
                       <div key={topic} style={{ padding: '1.25rem', backgroundColor: 'var(--color-bg)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
@@ -363,6 +373,90 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
                       </div>
                     );
                   })}
+                </div>
+              )}
+            </div>
+
+            {/* SPECIALTY BREAKDOWN */}
+            <div style={{ marginBottom: '3rem' }}>
+              <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'var(--color-brand-primary)' }}>Specialty Breakdown vs Global</h3>
+              {(!stats?.topicStats?.['__specialties'] || Object.keys(stats.topicStats['__specialties']).length === 0) ? (
+                 <p style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>Answer more questions to see your specialty breakdown.</p>
+              ) : (
+                <div style={{ height: '350px', backgroundColor: 'var(--color-bg)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                      data={Object.entries(stats.topicStats['__specialties']).map(([area, data]) => ({
+                        name: area,
+                        You: data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0,
+                        Global: globalAverages[area] || 0
+                      }))}
+                      margin={{ top: 20, right: 30, left: -20, bottom: 50 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+                      <XAxis dataKey="name" tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} angle={-45} textAnchor="end" height={60} />
+                      <YAxis tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} tickFormatter={(val) => `${val}%`} />
+                      <Tooltip contentStyle={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)', borderRadius: '8px' }} itemStyle={{ fontWeight: 'bold' }} />
+                      <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '14px' }} />
+                      <Bar dataKey="You" fill="var(--color-brand-secondary)" radius={[4, 4, 0, 0]} barSize={20} />
+                      <Bar dataKey="Global" fill="var(--color-brand-light)" stroke="var(--color-brand-primary)" radius={[4, 4, 0, 0]} barSize={20} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              )}
+            </div>
+
+            {/* PERFORMANCE OVER TIME */}
+            <div style={{ marginBottom: '3rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                <h3 style={{ fontSize: '1.2rem', margin: 0, color: 'var(--color-brand-primary)' }}>Performance Over Time</h3>
+                <div style={{ display: 'flex', gap: '0.5rem', backgroundColor: 'var(--color-bg-alt)', padding: '0.25rem', borderRadius: '50px', border: '1px solid var(--color-border)' }}>
+                  {['days', 'weeks', 'months'].map(filter => (
+                    <button 
+                      key={filter}
+                      onClick={() => setTimeFilter(filter)}
+                      style={{ 
+                        padding: '0.4rem 1rem', 
+                        border: 'none', 
+                        borderRadius: '50px', 
+                        backgroundColor: timeFilter === filter ? 'var(--color-brand-secondary)' : 'transparent', 
+                        color: timeFilter === filter ? '#fff' : 'var(--color-text-muted)',
+                        fontSize: '0.85rem',
+                        fontWeight: timeFilter === filter ? '600' : '500',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      {filter.charAt(0).toUpperCase() + filter.slice(1)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {(!stats?.topicStats?.['__timeline']?.[timeFilter] || Object.keys(stats.topicStats['__timeline'][timeFilter]).length === 0) ? (
+                 <p style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>No timeline data available for {timeFilter}.</p>
+              ) : (
+                <div style={{ height: '300px', backgroundColor: 'var(--color-bg)', padding: '1rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart
+                      data={Object.entries(stats.topicStats['__timeline'][timeFilter])
+                        .sort((a, b) => a[0].localeCompare(b[0]))
+                        .map(([dateStr, data]) => ({
+                          date: dateStr,
+                          'Correct Answers': data.correct,
+                          'Total Attempted': data.total
+                      }))}
+                      margin={{ top: 20, right: 30, left: -20, bottom: 20 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+                      <XAxis dataKey="date" tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} />
+                      <YAxis tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} allowDecimals={false} />
+                      <Tooltip contentStyle={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)', borderRadius: '8px' }} />
+                      <Legend verticalAlign="top" height={36} />
+                      <Line type="monotone" dataKey="Correct Answers" stroke="var(--color-success)" strokeWidth={3} dot={{ r: 4, fill: 'var(--color-success)', strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                      <Line type="monotone" dataKey="Total Attempted" stroke="var(--color-text-muted)" strokeWidth={2} strokeDasharray="5 5" dot={{ r: 3, fill: 'var(--color-text-muted)' }} />
+                    </LineChart>
+                  </ResponsiveContainer>
                 </div>
               )}
             </div>

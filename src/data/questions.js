@@ -4111,5 +4111,510 @@ export const questions = [
     "blueprint_tag": "Clinical Problem Solving",
     "clinical_area": "Neurology",
     "status": "Active"
+  },
+  {
+    "id": 165,
+    "type": "Ranking",
+    "stem": "An FY2 colleague on your rotation has been arriving late consistently for the past two weeks. They look unkempt, are withdrawn during handovers, and have made a few minor documentation errors. Rank the following actions.",
+    "options": [
+      "A. Speak to the colleague privately in a supportive manner to ask how they are doing and if anything is wrong.",
+      "B. Report their persistent lateness and errors to their clinical supervisor immediately.",
+      "C. Raise a formal fitness to practice concern with the GMC due to their errors.",
+      "D. Suggest to the rota coordinator that the colleague is taken off night shifts to help them catch up on sleep.",
+      "E. Start double-checking all of the colleague's documentation secretly to ensure no further errors are made."
+    ],
+    "correct": [
+      "A. Speak to the colleague privately in a supportive manner to ask how they are doing and if anything is wrong.",
+      "B. Report their persistent lateness and errors to their clinical supervisor immediately.",
+      "D. Suggest to the rota coordinator that the colleague is taken off night shifts to help them catch up on sleep.",
+      "E. Start double-checking all of the colleague's documentation secretly to ensure no further errors are made.",
+      "C. Raise a formal fitness to practice concern with the GMC due to their errors."
+    ],
+    "explanation": "This scenario highlights a struggling colleague who may be unwell or facing personal issues. The most appropriate first step is a private, supportive conversation to gather information and offer help (A). If they refuse help or the safety risk persists, escalating to their supervisor is necessary (B). Suggesting rota changes (D) might help but is treating the symptom, not the cause, and isn't your role. Secretly checking their work (E) is unsustainable and doesn't solve the problem. Escalating directly to the GMC (C) is a massive overreaction for an issue that can be managed locally.",
+    "topic": "Professionalism",
+    "subtopic": "Colleague Wellbeing",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 166,
+    "type": "Ranking",
+    "stem": "You are an FY1. Your registrar is very busy and asks you to quickly insert a central venous catheter (CVC) into a deteriorating patient. You have only observed this procedure once and have never done it yourself. Rank the following actions.",
+    "options": [
+      "A. Explain to the registrar that you are not trained or competent to insert a CVC and refuse to do it.",
+      "B. Attempt the procedure, as it is an emergency and the registrar has delegated it to you.",
+      "C. Ask the registrar to supervise you closely while you attempt the procedure for the first time.",
+      "D. Bleep the intensive care (ICU) registrar to come and insert the line instead.",
+      "E. Find the ward sister and ask her to insert the CVC, as she is very experienced."
+    ],
+    "correct": [
+      "A. Explain to the registrar that you are not trained or competent to insert a CVC and refuse to do it.",
+      "D. Bleep the intensive care (ICU) registrar to come and insert the line instead.",
+      "C. Ask the registrar to supervise you closely while you attempt the procedure for the first time.",
+      "E. Find the ward sister and ask her to insert the CVC, as she is very experienced.",
+      "B. Attempt the procedure, as it is an emergency and the registrar has delegated it to you."
+    ],
+    "explanation": "Working within your competence is a core GMC rule. Inserting a CVC is a high-risk procedure. You must immediately refuse and state your lack of competence (A). If the registrar is too busy, finding another competent doctor (like ICU) is the next best step for patient safety (D). Asking for supervision (C) is reasonable for learning, but perhaps inappropriate in a deteriorating emergency. Asking a ward sister (E) is inappropriate as it's typically a medical procedure. Attempting it unsupervised (B) is dangerous and negligent.",
+    "topic": "Patient Safety",
+    "subtopic": "Working Within Competence",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 167,
+    "type": "Ranking",
+    "stem": "You are a GP trainee. A patient you recently treated for a sexually transmitted infection sends you a 'friend request' on your personal Facebook account. They also send a message saying, 'Thanks for being so understanding today.' Rank the following actions.",
+    "options": [
+      "A. Ignore the friend request and do not reply to the message.",
+      "B. Reply to the message professionally, stating that you cannot accept friend requests from patients due to GMC guidance, then decline the request.",
+      "C. Accept the friend request so as not to offend them, but unfollow their posts.",
+      "D. Block the patient on Facebook immediately.",
+      "E. Document the interaction in the patient's medical notes and discuss it with your clinical supervisor."
+    ],
+    "correct": [
+      "B. Reply to the message professionally, stating that you cannot accept friend requests from patients due to GMC guidance, then decline the request.",
+      "A. Ignore the friend request and do not reply to the message.",
+      "E. Document the interaction in the patient's medical notes and discuss it with your clinical supervisor.",
+      "D. Block the patient on Facebook immediately.",
+      "C. Accept the friend request so as not to offend them, but unfollow their posts."
+    ],
+    "explanation": "Maintaining professional boundaries on social media is critical. The most professional action is to set a clear boundary by politely explaining why you must decline the request (B). Simply ignoring it (A) is also acceptable but doesn't actively set the boundary. Documenting and discussing it (E) is good practice, especially if the behaviour escalates. Immediately blocking (D) could damage the therapeutic relationship unnecessarily. Accepting the request (C) is a breach of GMC guidelines.",
+    "topic": "Professionalism",
+    "subtopic": "Social Media & Boundaries",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 168,
+    "type": "Ranking",
+    "stem": "You are the surgical SHO on a night shift. The consultant surgeon arrives at 2 AM to perform an emergency laparotomy. When they lean in to examine the patient, you smell a strong odour of alcohol on their breath, and their speech seems slightly slurred. Rank the following actions.",
+    "options": [
+      "A. Prevent the consultant from operating and contact the medical director or the on-call hospital manager immediately.",
+      "B. Pull the consultant aside, mention the smell of alcohol, and ask if they are fit to operate.",
+      "C. Say nothing to the consultant but closely monitor them during the surgery to ensure they don't make mistakes.",
+      "D. Inform the anaesthetist of your suspicions and ask them what to do.",
+      "E. Cancel the operation and send the patient back to the ward."
+    ],
+    "correct": [
+      "A. Prevent the consultant from operating and contact the medical director or the on-call hospital manager immediately.",
+      "D. Inform the anaesthetist of your suspicions and ask them what to do.",
+      "B. Pull the consultant aside, mention the smell of alcohol, and ask if they are fit to operate.",
+      "E. Cancel the operation and send the patient back to the ward.",
+      "C. Say nothing to the consultant but closely monitor them during the surgery to ensure they don't make mistakes."
+    ],
+    "explanation": "Patient safety is the absolute priority. A doctor under the influence of alcohol performing surgery is an immediate, severe risk. You must escalate this immediately to the highest level of management available to stop the surgery (A). Involving another senior colleague present (the anaesthetist) for support is also a strong action (D). Asking the impaired consultant to self-assess (B) is unreliable. Cancelling an *emergency* operation without an alternative plan (E) harms the patient. Letting them operate (C) is grossly negligent.",
+    "topic": "Patient Safety",
+    "subtopic": "Impaired Colleague",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 169,
+    "type": "Ranking",
+    "stem": "A 25-year-old man with mild learning disabilities is admitted with pneumonia. You need to take a blood sample. He understands why the blood test is needed but is terrified of needles and refuses to let you do it. Rank the following actions.",
+    "options": [
+      "A. Assess his capacity to refuse the specific intervention (the blood test).",
+      "B. If he has capacity, respect his refusal and discuss alternative ways to monitor his infection.",
+      "C. Ask his parents to consent on his behalf so you can proceed.",
+      "D. Restrain his arm gently with the help of a nurse to take the blood quickly in his best interests.",
+      "E. Prescribe a sedative to calm him down so you can take the blood while he is drowsy."
+    ],
+    "correct": [
+      "A. Assess his capacity to refuse the specific intervention (the blood test).",
+      "B. If he has capacity, respect his refusal and discuss alternative ways to monitor his infection.",
+      "C. Ask his parents to consent on his behalf so you can proceed.",
+      "E. Prescribe a sedative to calm him down so you can take the blood while he is drowsy.",
+      "D. Restrain his arm gently with the help of a nurse to take the blood quickly in his best interests."
+    ],
+    "explanation": "Having a learning disability does not automatically mean a lack of capacity. The first step is always to assess capacity for the specific decision at hand (A). If competent, his refusal must be respected (B). Parents cannot legally consent for a competent adult (C), though they can offer support. Chemical restraint (E) or physical restraint (D) on a competent adult who has refused is battery/assault.",
+    "topic": "Consent",
+    "subtopic": "Capacity & Learning Disabilities",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 170,
+    "type": "MultipleChoice",
+    "stem": "You follow a fellow FY1 on Instagram. While on a night shift, they post a selfie of themselves in the resuscitation room. In the background, a patient's face and a whiteboard with patient names are clearly visible. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Screenshot the post as evidence before they can delete it.",
+      "B. Message the colleague immediately, explaining the breach of confidentiality and asking them to delete the post.",
+      "C. Report the breach to the Caldicott Guardian or clinical supervisor.",
+      "D. Post a public comment on the photo telling them they are breaking GMC rules.",
+      "E. Call the police to report a breach of data protection laws.",
+      "F. Ignore it, as it is their personal social media account.",
+      "G. Show the photo to the patients involved to see if they mind.",
+      "H. Wait until the next day to tell them to delete it so you don't disturb their shift."
+    ],
+    "correct": [
+      "A. Screenshot the post as evidence before they can delete it.",
+      "B. Message the colleague immediately, explaining the breach of confidentiality and asking them to delete the post.",
+      "C. Report the breach to the Caldicott Guardian or clinical supervisor."
+    ],
+    "explanation": "This is a severe breach of patient confidentiality. The immediate priority is to stop the ongoing harm, so asking them to delete it urgently is key (B). Because it is a digital breach that could spread, capturing evidence (A) and formally reporting it to the trust's data lead (C) is necessary to manage the fallout. Publicly shaming them (D) is unprofessional. Ignoring it (F) is unacceptable. Calling the police (E) is disproportionate for an internal hospital data issue.",
+    "topic": "Confidentiality",
+    "subtopic": "Social Media Breach",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 171,
+    "type": "MultipleChoice",
+    "stem": "A colleague asks you to cover their on-call shift this weekend. They tell you confidentially that they are going to call in sick because their leave request was denied, and they really want to attend a friend's wedding. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Refuse to cover the shift under these circumstances.",
+      "B. Advise your colleague that falsely claiming sickness is fraudulent and a severe probity issue.",
+      "C. Report the colleague's plan to the rota coordinator or clinical supervisor.",
+      "D. Agree to cover the shift, but charge the colleague double your usual locum rate.",
+      "E. Agree to cover the shift to ensure the ward is safely staffed, and say nothing.",
+      "F. Go to the wedding yourself instead.",
+      "G. Tell the colleague you will cover the shift only if they attend a probity course.",
+      "H. Encourage the colleague to be honest with the consultant and ask for exceptional leave."
+    ],
+    "correct": [
+      "A. Refuse to cover the shift under these circumstances.",
+      "B. Advise your colleague that falsely claiming sickness is fraudulent and a severe probity issue.",
+      "H. Encourage the colleague to be honest with the consultant and ask for exceptional leave."
+    ],
+    "explanation": "Falsely claiming sickness is fraud and a massive probity violation. You must not facilitate this by covering the shift (A). You have a duty to advise them of the professional consequences of their planned action (B) and encourage a truthful approach, such as asking for exceptional leave (H). Covering the shift (E) or extorting them (D) makes you complicit in the dishonesty. Reporting them preemptively (C) is harsh before they have actually committed the act, but would be necessary if they follow through.",
+    "topic": "Probity",
+    "subtopic": "Fraudulent Sickness",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 172,
+    "type": "MultipleChoice",
+    "stem": "An elderly patient with full capacity is admitted after a fall. Their adult son corners you on the ward, acting aggressively. He demands to see his father's medical notes immediately, stating, 'I have a right to know what you are doing to him.' The patient has previously asked you not to share details with his son. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Firmly but politely refuse to share the notes, citing patient confidentiality.",
+      "B. Explain to the son that he can only see the notes if the patient provides explicit consent.",
+      "C. Hand over the notes to calm the son down and avoid a violent altercation.",
+      "D. Call hospital security if the son remains aggressive and refuses to leave you alone.",
+      "E. Give the son a brief, vague summary of the patient's condition instead of the actual notes.",
+      "F. Tell the son that his father specifically forbade you from speaking to him.",
+      "G. Ask the nurses to deal with the son while you hide.",
+      "H. Call the police to arrest the son."
+    ],
+    "correct": [
+      "A. Firmly but politely refuse to share the notes, citing patient confidentiality.",
+      "B. Explain to the son that he can only see the notes if the patient provides explicit consent.",
+      "D. Call hospital security if the son remains aggressive and refuses to leave you alone."
+    ],
+    "explanation": "Patient confidentiality must be maintained. The patient has capacity and has explicitly denied consent to share information with the son. You must refuse the son's demand (A) and explain the legal/ethical requirement for patient consent (B). If his aggression escalates, involving security is the correct way to protect yourself and staff (D). Giving the notes (C) or a vague summary (E) breaches confidentiality. Telling the son his father forbade it (F) might unnecessarily antagonize the family dynamic.",
+    "topic": "Confidentiality",
+    "subtopic": "Aggressive Relatives",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 173,
+    "type": "MultipleChoice",
+    "stem": "You are on the ward and notice a nurse administering 10mg of amlodipine to a patient, rather than the prescribed 5mg. You intervene just as the patient swallows the tablet. The patient's blood pressure is currently high, and the extra dose causes no harm. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Speak to the nurse privately about the error and ensure they understand the correct dosage.",
+      "B. Inform the patient about the medication error, apologize, and explain that no harm has occurred.",
+      "C. Complete a clinical incident form (Datix) to record the drug error.",
+      "D. Document the extra dose in the patient's notes and monitor their blood pressure closely.",
+      "E. Shout at the nurse in front of the patient for being careless.",
+      "F. Do not tell the patient, as they were not harmed and it might cause them unnecessary anxiety.",
+      "G. Report the nurse to the NMC immediately for unsafe practice.",
+      "H. Prescribe an antidote immediately just in case."
+    ],
+    "correct": [
+      "B. Inform the patient about the medication error, apologize, and explain that no harm has occurred.",
+      "C. Complete a clinical incident form (Datix) to record the drug error.",
+      "D. Document the extra dose in the patient's notes and monitor their blood pressure closely."
+    ],
+    "explanation": "Even if no harm occurs, a medication error has happened. The Duty of Candour requires you to be open and honest with the patient about the error (B). Systemic reporting via Datix (C) is essential for hospital safety audits. Clinical documentation and monitoring (D) are required for ongoing patient safety. Keeping it a secret (F) breaches probity. Shouting (E) is unprofessional. Reporting to the NMC (G) is an overreaction for a single, harmless error.",
+    "topic": "Probity",
+    "subtopic": "Duty of Candour (No Harm)",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 174,
+    "type": "MultipleChoice",
+    "stem": "You are treating a 30-year-old woman in A&E for a fractured wrist. During the consultation, she breaks down and discloses that her husband caused the injury and frequently beats her. She begs you not to tell anyone, especially the police, as she fears he will kill her. She has capacity and there are no children in the house. Choose the 3 most appropriate actions.",
+    "options": [
+      "A. Respect her confidentiality and do not inform the police against her wishes.",
+      "B. Document her disclosure thoroughly and objectively in her medical notes.",
+      "C. Provide her with information on domestic abuse support services and safe houses.",
+      "D. Call the police immediately, as a crime has been committed, regardless of her wishes.",
+      "E. Confront the husband in the waiting room and tell him to leave her alone.",
+      "F. Admit her to the hospital against her will for her own safety.",
+      "G. Discuss the case with the hospital's safeguarding lead for advice on supporting her.",
+      "H. Refuse to treat the fracture until she agrees to press charges."
+    ],
+    "correct": [
+      "A. Respect her confidentiality and do not inform the police against her wishes.",
+      "B. Document her disclosure thoroughly and objectively in her medical notes.",
+      "C. Provide her with information on domestic abuse support services and safe houses."
+    ],
+    "explanation": "In adult safeguarding where the patient has capacity and there are no children or vulnerable adults at risk, you must respect their confidentiality and right to make their own choices, even if those choices put them at risk (A). Therefore, you cannot force police involvement (D). You must provide support and resources (C) and ensure accurate documentation (B). Discussing anonymously with a safeguarding lead is also good practice, but breaching confidentiality without consent in this specific scenario is legally perilous.",
+    "topic": "Safeguarding",
+    "subtopic": "Adult Domestic Abuse",
+    "blueprint_tag": "Professional Dilemmas",
+    "clinical_area": "Professional Attributes",
+    "status": "Active"
+  },
+  {
+    "id": 175,
+    "type": "SBA",
+    "stem": "A 38-year-old woman presents to her GP complaining of heavy menstrual bleeding (menorrhagia) that is affecting her quality of life. Her pelvic ultrasound is normal (no fibroids or polyps). She also desires long-term contraception. What is the most appropriate first-line pharmacological treatment?",
+    "options": [
+      "Tranexamic acid",
+      "Mefenamic acid",
+      "Combined Oral Contraceptive Pill (COCP)",
+      "Levonorgestrel-releasing intrauterine system (LNG-IUS / Mirena)",
+      "Oral norethisterone"
+    ],
+    "correct": "Levonorgestrel-releasing intrauterine system (LNG-IUS / Mirena)",
+    "explanation": "According to NICE guidelines, the first-line treatment for heavy menstrual bleeding in women with no structural abnormalities, especially when contraception is also desired, is the LNG-IUS (Mirena coil). Tranexamic and mefenamic acid are options if the woman does not want hormonal treatment or contraception.",
+    "topic": "Obstetrics & Gynaecology",
+    "subtopic": "Menstrual Disorders",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Reproductive",
+    "status": "Active"
+  },
+  {
+    "id": 176,
+    "type": "SBA",
+    "stem": "A 62-year-old man with stable angina presents for an annual review. He currently uses a GTN spray as required, which relieves his symptoms, but he is experiencing chest pain 3-4 times a week when walking uphill. What is the most appropriate first-line preventative medication to add?",
+    "options": [
+      "Aspirin",
+      "Amlodipine (Calcium channel blocker)",
+      "Bisoprolol (Beta-blocker)",
+      "Isosorbide mononitrate",
+      "Nicorandil"
+    ],
+    "correct": "Bisoprolol (Beta-blocker)",
+    "explanation": "For the symptomatic prevention of stable angina, NICE recommends either a beta-blocker (e.g., bisoprolol) OR a rate-limiting calcium channel blocker (e.g., diltiazem/verapamil) as first-line therapy. If one is contraindicated or not tolerated, the other is used. Amlodipine is a dihydropyridine CCB, often used second-line or in combination.",
+    "topic": "Cardiovascular",
+    "subtopic": "Ischaemic Heart Disease",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Cardiovascular",
+    "status": "Active"
+  },
+  {
+    "id": 177,
+    "type": "SBA",
+    "stem": "A 40-year-old woman presents to A&E with sudden onset pleuritic chest pain and shortness of breath. She recently returned from a 12-hour flight. Her heart rate is 110 bpm and respiratory rate is 22/min. Her Wells score for PE is 6 (High probability). What is the most appropriate next investigation?",
+    "options": [
+      "D-dimer blood test",
+      "Chest X-ray",
+      "CT Pulmonary Angiogram (CTPA)",
+      "Ventilation-Perfusion (V/Q) scan",
+      "Echocardiogram"
+    ],
+    "correct": "CT Pulmonary Angiogram (CTPA)",
+    "explanation": "In a patient with a 'likely' probability of a Pulmonary Embolism (Wells score > 4), the next step is diagnostic imaging with a CTPA. A D-dimer is only useful to rule out a PE in patients with an 'unlikely' (Wells <= 4) score; it is not indicated if the clinical probability is already high.",
+    "topic": "Respiratory",
+    "subtopic": "Pulmonary Embolism",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Respiratory",
+    "status": "Active"
+  },
+  {
+    "id": 178,
+    "type": "SBA",
+    "stem": "A 75-year-old man develops severe, foul-smelling, watery diarrhoea on the ward. He recently finished a course of co-amoxiclav for a chest infection. Stool toxin is positive for Clostridioides difficile. What is the most appropriate first-line treatment for a first episode of mild-to-moderate C. difficile infection?",
+    "options": [
+      "Oral metronidazole",
+      "Intravenous metronidazole",
+      "Oral vancomycin",
+      "Intravenous vancomycin",
+      "Oral fidaxomicin"
+    ],
+    "correct": "Oral vancomycin",
+    "explanation": "Current NICE guidelines (updated from older guidance) recommend oral vancomycin as the first-line treatment for a first episode of C. difficile infection. Oral fidaxomicin is an alternative first-line option. Oral metronidazole is now only recommended if the others are unavailable. IV vancomycin is not secreted into the gut lumen and is therefore ineffective for C. diff.",
+    "topic": "Gastroenterology",
+    "subtopic": "Infectious Diarrhoea",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Gastroenterology",
+    "status": "Active"
+  },
+  {
+    "id": 179,
+    "type": "SBA",
+    "stem": "A 22-year-old man is brought to the GP by his mother. Over the last 6 months, he has become increasingly withdrawn, stopped attending university, and claims that the television news anchors are talking directly to him and plotting against him. He occasionally hears a voice commenting on his actions. What is the most likely diagnosis?",
+    "options": [
+      "Bipolar Affective Disorder (Manic phase)",
+      "Major Depressive Disorder with psychotic features",
+      "Schizophrenia",
+      "Delirium",
+      "Schizoid personality disorder"
+    ],
+    "correct": "Schizophrenia",
+    "explanation": "The patient is presenting with classic first-rank symptoms of schizophrenia, including delusions of reference (the TV talking to him) and auditory hallucinations (voices commenting on actions), alongside negative symptoms (withdrawal, loss of function) persisting for over 6 months.",
+    "topic": "Psychiatry",
+    "subtopic": "Psychotic Disorders",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Psychiatry",
+    "status": "Active"
+  },
+  {
+    "id": 180,
+    "type": "EMQ",
+    "theme": "Thyroid Function Tests",
+    "stem": "For each set of thyroid function test results, select the most likely clinical diagnosis. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Primary Hypothyroidism",
+      "B. Secondary Hypothyroidism (Pituitary failure)",
+      "C. Primary Hyperthyroidism",
+      "D. Subclinical Hypothyroidism",
+      "E. Sick Euthyroid Syndrome"
+    ],
+    "scenarios": [
+      {
+        "id": "180a",
+        "text": "TSH: High. Free T4: Low.",
+        "correct": "A. Primary Hypothyroidism"
+      },
+      {
+        "id": "180b",
+        "text": "TSH: High. Free T4: Normal.",
+        "correct": "D. Subclinical Hypothyroidism"
+      }
+    ],
+    "explanation": "High TSH with a low T4 indicates the thyroid gland is failing to produce hormone despite high stimulation from the pituitary (Primary Hypothyroidism). High TSH with a normal T4 indicates early or mild thyroid strain that hasn't yet resulted in systemic hormone deficiency (Subclinical Hypothyroidism).",
+    "topic": "Endocrinology",
+    "subtopic": "Thyroid Disease",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Endocrinology",
+    "status": "Active"
+  },
+  {
+    "id": 181,
+    "type": "EMQ",
+    "theme": "Clotting Profiles",
+    "stem": "For each patient presentation and clotting profile, select the most likely diagnosis. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Haemophilia A",
+      "B. Von Willebrand Disease",
+      "C. Disseminated Intravascular Coagulation (DIC)",
+      "D. Warfarin therapy",
+      "E. Idiopathic Thrombocytopenic Purpura (ITP)"
+    ],
+    "scenarios": [
+      {
+        "id": "181a",
+        "text": "A young boy presents with recurrent haemarthroses (joint bleeds). Bloods: Normal PT, Prolonged APTT, Normal Bleeding Time, Normal Platelets.",
+        "correct": "A. Haemophilia A"
+      },
+      {
+        "id": "181b",
+        "text": "A patient with severe sepsis begins bleeding from their IV sites. Bloods: Prolonged PT, Prolonged APTT, Low Platelets, High D-dimer, Low Fibrinogen.",
+        "correct": "C. Disseminated Intravascular Coagulation (DIC)"
+      }
+    ],
+    "explanation": "Haemophilia (Factor VIII or IX deficiency) affects the intrinsic pathway, prolonging the APTT only, while platelets and bleeding time remain normal. DIC is a consumptive coagulopathy causing derangement of all clotting parameters (prolonged PT/APTT, thrombocytopenia, and high D-dimer due to fibrinolysis).",
+    "topic": "Haematology",
+    "subtopic": "Coagulation Disorders",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Haematology",
+    "status": "Active"
+  },
+  {
+    "id": 182,
+    "type": "EMQ",
+    "theme": "Childhood Rashes",
+    "stem": "For each clinical description of a rash in a child, select the most likely causative organism or disease. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Varicella Zoster Virus (Chickenpox)",
+      "B. Parvovirus B19 (Slapped cheek syndrome)",
+      "C. Measles virus",
+      "D. Coxsackie A virus (Hand, Foot and Mouth)",
+      "E. Streptococcus pyogenes (Scarlet fever)"
+    ],
+    "scenarios": [
+      {
+        "id": "182a",
+        "text": "A 5-year-old child presents with a widespread intensely itchy rash. The lesions are in various stages of development: macules, papules, and fluid-filled vesicles.",
+        "correct": "A. Varicella Zoster Virus (Chickenpox)"
+      },
+      {
+        "id": "182b",
+        "text": "A 4-year-old child presents with a fever, sore throat, and a 'sandpaper-like' rough erythematous rash on their torso. They also have a 'strawberry tongue'.",
+        "correct": "E. Streptococcus pyogenes (Scarlet fever)"
+      }
+    ],
+    "explanation": "Chickenpox (VZV) classically presents with crops of intensely itchy vesicles in different stages of healing. Scarlet fever (Group A Strep) presents with a sore throat, strawberry tongue, and a rough, sandpaper-like blanching rash.",
+    "topic": "Paediatrics",
+    "subtopic": "Infectious Diseases",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Paediatrics",
+    "status": "Active"
+  },
+  {
+    "id": 183,
+    "type": "EMQ",
+    "theme": "Upper Limb Fractures",
+    "stem": "For each description of a wrist/hand injury, select the most likely fracture. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Colles' fracture",
+      "B. Smith's fracture",
+      "C. Scaphoid fracture",
+      "D. Boxer's fracture",
+      "E. Barton's fracture"
+    ],
+    "scenarios": [
+      {
+        "id": "183a",
+        "text": "An elderly woman falls onto an outstretched hand (FOOSH). X-ray shows a distal radius fracture with dorsal (posterior) displacement, giving a 'dinner fork' deformity.",
+        "correct": "A. Colles' fracture"
+      },
+      {
+        "id": "183b",
+        "text": "A 20-year-old man falls onto an outstretched hand. Initial X-rays are normal, but he has severe tenderness in the anatomical snuffbox.",
+        "correct": "C. Scaphoid fracture"
+      }
+    ],
+    "explanation": "A Colles' fracture is a distal radius fracture with dorsal displacement (dinner fork deformity). Anatomical snuffbox tenderness following a FOOSH is the hallmark of a scaphoid fracture, which often does not appear on initial X-rays and requires a cast and repeat imaging due to the risk of avascular necrosis.",
+    "topic": "Surgery",
+    "subtopic": "Trauma & Orthopaedics",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Surgery",
+    "status": "Active"
+  },
+  {
+    "id": 184,
+    "type": "EMQ",
+    "theme": "Nephrotic Syndrome",
+    "stem": "For each patient presenting with nephrotic syndrome (proteinuria, hypoalbuminaemia, oedema), select the most likely underlying histological cause. Each option may be used once, more than once, or not at all.",
+    "options": [
+      "A. Minimal Change Disease",
+      "B. Membranous Nephropathy",
+      "C. Focal Segmental Glomerulosclerosis (FSGS)",
+      "D. Diabetic Nephropathy",
+      "E. IgA Nephropathy"
+    ],
+    "scenarios": [
+      {
+        "id": "184a",
+        "text": "A 4-year-old boy presents with severe periorbital and peripheral oedema. His blood pressure is normal. The condition completely resolves after a short course of high-dose oral steroids.",
+        "correct": "A. Minimal Change Disease"
+      },
+      {
+        "id": "184b",
+        "text": "A 60-year-old man with a history of solid organ malignancy (lung cancer) develops severe proteinuria and oedema.",
+        "correct": "B. Membranous Nephropathy"
+      }
+    ],
+    "explanation": "Minimal Change Disease is the most common cause of nephrotic syndrome in children and typically responds very well to steroids. Membranous Nephropathy is the most common cause in adults and is frequently associated with secondary causes like solid organ malignancies (e.g., lung, breast, colon cancer) or autoimmune diseases.",
+    "topic": "Renal",
+    "subtopic": "Glomerular Disease",
+    "blueprint_tag": "Clinical Problem Solving",
+    "clinical_area": "Renal",
+    "status": "Active"
   }
 ];
