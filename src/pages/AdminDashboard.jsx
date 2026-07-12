@@ -26,31 +26,54 @@ export default function AdminDashboard({ questions, updateQuestions }) {
 
   // User Stats state
   const [userStatsData, setUserStatsData] = useState({ totalUsers: 0, totalAnswered: 0, totalCorrect: 0 });
+  const [allStats, setAllStats] = useState([]);
 
-  // Fetch stats when tools tab is active
+  // Fetch stats and users on mount
   useEffect(() => {
-    if (activeTab === 'tools') {
-      const fetchStats = async () => {
-        try {
-          const [users, stats] = await Promise.all([db.getAllUsers(), db.getAllStats()]);
-          let totalAnswered = 0;
-          let totalCorrect = 0;
-          stats.forEach(s => {
-            totalAnswered += s.totalAnswered || 0;
-            totalCorrect += s.correctAnswered || 0;
-          });
-          setUserStatsData({
-            totalUsers: users.length,
-            totalAnswered,
-            totalCorrect
-          });
-        } catch (err) {
-          console.error("Failed to load admin stats", err);
+    const fetchStats = async () => {
+      try {
+        const [users, stats] = await Promise.all([db.getAllUsers(), db.getAllStats()]);
+        setAllStats(stats);
+        let totalAnswered = 0;
+        let totalCorrect = 0;
+        stats.forEach(s => {
+          totalAnswered += s.totalAnswered || 0;
+          totalCorrect += s.correctAnswered || 0;
+        });
+        setUserStatsData({
+          totalUsers: users.length,
+          totalAnswered,
+          totalCorrect
+        });
+      } catch (err) {
+        console.error("Failed to load admin stats", err);
+      }
+    };
+    fetchStats();
+  }, []);
+
+  // Compute ratings mapping: questionId -> { sum: number, count: number }
+  const questionRatings = {};
+  allStats.forEach(s => {
+    if (s.ratings) {
+      Object.entries(s.ratings).forEach(([qId, rating]) => {
+        if (!questionRatings[qId]) {
+          questionRatings[qId] = { sum: 0, count: 0 };
         }
-      };
-      fetchStats();
+        questionRatings[qId].sum += Number(rating) || 0;
+        questionRatings[qId].count += 1;
+      });
     }
-  }, [activeTab]);
+  });
+
+  const getAverageRating = (qId) => {
+    const data = questionRatings[qId];
+    if (!data || data.count === 0) return null;
+    return {
+      average: (data.sum / data.count).toFixed(1),
+      count: data.count
+    };
+  };
 
   // Initial state helper for a new question based on type
   const getInitialFormState = (type = 'SBA') => {
@@ -895,50 +918,65 @@ export default function AdminDashboard({ questions, updateQuestions }) {
                           <th style={{ padding: '0.75rem 0.5rem' }}>Type</th>
                           <th style={{ padding: '0.75rem 0.5rem' }}>Topic</th>
                           <th style={{ padding: '0.75rem 0.5rem' }}>Tag</th>
+                          <th style={{ padding: '0.75rem 0.5rem' }}>Avg Rating</th>
                           <th style={{ padding: '0.75rem 0.5rem' }}>Status</th>
                           <th style={{ padding: '0.75rem 0.5rem', textAlign: 'right' }}>Actions</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {filteredQuestions.map((q) => (
-                          <tr key={q.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'background-color 0.2s' }}>
-                            <td style={{ padding: '0.75rem 0.5rem', fontWeight: 'bold' }}>#{q.id}</td>
-                            <td style={{ padding: '0.75rem 0.5rem' }}>
-                              <span className="badge badge-secondary" style={{ textTransform: 'uppercase', fontSize: '0.75rem' }}>
-                                {q.type}
-                              </span>
-                            </td>
-                            <td style={{ padding: '0.75rem 0.5rem' }}>{q.topic}</td>
-                            <td style={{ padding: '0.75rem 0.5rem', color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>{q.blueprint_tag}</td>
-                            <td style={{ padding: '0.75rem 0.5rem' }}>
-                              {q.flags && q.flags.length > 0 ? (
-                                <span className="badge badge-error" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.75rem', fontWeight: 'bold' }}>
-                                  <Flag size={10} fill="currentColor" /> {q.flags.length} flag{q.flags.length > 1 ? 's' : ''}
+                        {filteredQuestions.map((q) => {
+                          const ratingInfo = getAverageRating(q.id);
+                          return (
+                            <tr key={q.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'background-color 0.2s' }}>
+                              <td style={{ padding: '0.75rem 0.5rem', fontWeight: 'bold' }}>#{q.id}</td>
+                              <td style={{ padding: '0.75rem 0.5rem' }}>
+                                <span className="badge badge-secondary" style={{ textTransform: 'uppercase', fontSize: '0.75rem' }}>
+                                  {q.type}
                                 </span>
-                              ) : (
-                                <span className="badge badge-success" style={{ fontSize: '0.75rem' }}>Active</span>
-                              )}
-                            </td>
-                            <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right' }}>
-                              <div style={{ display: 'inline-flex', gap: '0.5rem' }}>
-                                <button 
-                                  className="btn btn-secondary btn-sm" 
-                                  onClick={() => handleEditClick(q)} 
-                                  style={{ padding: '0.25rem 0.5rem', minWidth: 'auto' }}
-                                >
-                                  <Edit3 size={14} />
-                                </button>
-                                <button 
-                                  className="btn btn-secondary btn-sm" 
-                                  onClick={() => handleDeleteClick(q.id)}
-                                  style={{ padding: '0.25rem 0.5rem', color: 'red', minWidth: 'auto' }}
-                                >
-                                  <Trash2 size={14} />
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
+                              </td>
+                              <td style={{ padding: '0.75rem 0.5rem' }}>{q.topic}</td>
+                              <td style={{ padding: '0.75rem 0.5rem', color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>{q.blueprint_tag}</td>
+                              <td style={{ padding: '0.75rem 0.5rem' }}>
+                                {ratingInfo ? (
+                                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', color: '#ffc107', fontWeight: '500' }}>
+                                    <span style={{ fontSize: '1rem', lineHeight: '1' }}>★</span>
+                                    <span style={{ color: 'var(--color-text)' }}>{ratingInfo.average}</span>
+                                    <span className="text-muted" style={{ fontSize: '0.75rem', fontWeight: 'normal' }}>({ratingInfo.count})</span>
+                                  </span>
+                                ) : (
+                                  <span className="text-muted" style={{ fontSize: '0.8rem' }}>N/A</span>
+                                )}
+                              </td>
+                              <td style={{ padding: '0.75rem 0.5rem' }}>
+                                {q.flags && q.flags.length > 0 ? (
+                                  <span className="badge badge-error" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.75rem', fontWeight: 'bold' }}>
+                                    <Flag size={10} fill="currentColor" /> {q.flags.length} flag{q.flags.length > 1 ? 's' : ''}
+                                  </span>
+                                ) : (
+                                  <span className="badge badge-success" style={{ fontSize: '0.75rem' }}>Active</span>
+                                )}
+                              </td>
+                              <td style={{ padding: '0.75rem 0.5rem', textAlign: 'right' }}>
+                                <div style={{ display: 'inline-flex', gap: '0.5rem' }}>
+                                  <button 
+                                    className="btn btn-secondary btn-sm" 
+                                    onClick={() => handleEditClick(q)} 
+                                    style={{ padding: '0.25rem 0.5rem', minWidth: 'auto' }}
+                                  >
+                                    <Edit3 size={14} />
+                                  </button>
+                                  <button 
+                                    className="btn btn-secondary btn-sm" 
+                                    onClick={() => handleDeleteClick(q.id)}
+                                    style={{ padding: '0.25rem 0.5rem', color: 'red', minWidth: 'auto' }}
+                                  >
+                                    <Trash2 size={14} />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>
@@ -961,73 +999,83 @@ export default function AdminDashboard({ questions, updateQuestions }) {
                   </p>
                 </div>
               ) : (
-                flaggedQuestions.map(q => (
-                  <div key={q.id} className="card animate-fade" style={{ borderLeft: '4px solid var(--color-error)' }}>
-                    <div className="flex-between" style={{ marginBottom: '1rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '0.75rem' }}>
+                flaggedQuestions.map(q => {
+                  const ratingInfo = getAverageRating(q.id);
+                  return (
+                    <div key={q.id} className="card animate-fade" style={{ borderLeft: '4px solid var(--color-error)' }}>
+                      <div className="flex-between" style={{ marginBottom: '1rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '0.75rem' }}>
+                        <div>
+                          <span style={{ fontWeight: 'bold', marginRight: '0.5rem' }}>Question #{q.id}</span>
+                          <span className="badge badge-secondary" style={{ marginRight: '0.5rem', textTransform: 'uppercase', fontSize: '0.75rem' }}>{q.type}</span>
+                          {ratingInfo && (
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem', color: '#ffc107', fontWeight: '500', marginRight: '0.5rem', fontSize: '0.85rem' }}>
+                              <span style={{ fontSize: '0.9rem', lineHeight: '1' }}>★</span>
+                              <span style={{ color: 'var(--color-text)' }}>{ratingInfo.average}</span>
+                              <span className="text-muted" style={{ fontSize: '0.75rem', fontWeight: 'normal' }}>({ratingInfo.count})</span>
+                            </span>
+                          )}
+                          <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>{q.topic} &raquo; {q.subtopic}</span>
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                          <button 
+                            className="btn btn-secondary btn-sm"
+                            onClick={() => handleResolveFlags(q.id)}
+                            style={{ color: 'var(--color-success)', borderColor: 'var(--color-success-border)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                          >
+                            <Check size={14} />
+                            <span>Resolve Flags</span>
+                          </button>
+                          <button 
+                            className="btn btn-secondary btn-sm"
+                            onClick={() => handleEditClick(q)}
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                          >
+                            <Edit3 size={14} />
+                            <span>Edit</span>
+                          </button>
+                          <button 
+                            className="btn btn-secondary btn-sm"
+                            onClick={() => handleDeleteClick(q.id)}
+                            style={{ color: 'red', display: 'inline-flex', alignItems: 'center' }}
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      </div>
+
+                      <div style={{ marginBottom: '1.25rem' }}>
+                        <h5 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--color-text-muted)' }}>Question Stem:</h5>
+                        <p style={{ fontSize: '0.9rem', backgroundColor: 'var(--color-bg-app)', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', whiteSpace: 'pre-wrap' }}>
+                          {q.stem}
+                        </p>
+                      </div>
+
                       <div>
-                        <span style={{ fontWeight: 'bold', marginRight: '0.5rem' }}>Question #{q.id}</span>
-                        <span className="badge badge-secondary" style={{ marginRight: '0.5rem', textTransform: 'uppercase', fontSize: '0.75rem' }}>{q.type}</span>
-                        <span style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>{q.topic} &raquo; {q.subtopic}</span>
-                      </div>
-                      <div style={{ display: 'flex', gap: '0.5rem' }}>
-                        <button 
-                          className="btn btn-secondary btn-sm"
-                          onClick={() => handleResolveFlags(q.id)}
-                          style={{ color: 'var(--color-success)', borderColor: 'var(--color-success-border)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
-                        >
-                          <Check size={14} />
-                          <span>Resolve Flags</span>
-                        </button>
-                        <button 
-                          className="btn btn-secondary btn-sm"
-                          onClick={() => handleEditClick(q)}
-                          style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
-                        >
-                          <Edit3 size={14} />
-                          <span>Edit</span>
-                        </button>
-                        <button 
-                          className="btn btn-secondary btn-sm"
-                          onClick={() => handleDeleteClick(q.id)}
-                          style={{ color: 'red', display: 'inline-flex', alignItems: 'center' }}
-                        >
-                          <Trash2 size={14} />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div style={{ marginBottom: '1.25rem' }}>
-                      <h5 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--color-text-muted)' }}>Question Stem:</h5>
-                      <p style={{ fontSize: '0.9rem', backgroundColor: 'var(--color-bg-app)', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--color-border)', whiteSpace: 'pre-wrap' }}>
-                        {q.stem}
-                      </p>
-                    </div>
-
-                    <div>
-                      <h5 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--color-error)' }}>
-                        User Feedback / Flag Reports ({q.flags.length}):
-                      </h5>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                        {q.flags.map((flag, idx) => (
-                          <div key={idx} style={{ 
-                            display: 'flex', 
-                            gap: '0.75rem', 
-                            padding: '0.75rem', 
-                            backgroundColor: 'rgba(239, 68, 68, 0.05)', 
-                            border: '1px solid rgba(239, 68, 68, 0.15)', 
-                            borderRadius: 'var(--radius-sm)',
-                            fontSize: '0.85rem'
-                          }}>
-                            <div style={{ color: 'var(--color-error)', flexShrink: 0, marginTop: '2px' }}>
-                              <Flag size={14} fill="currentColor" />
+                        <h5 style={{ fontSize: '0.85rem', fontWeight: 'bold', marginBottom: '0.5rem', color: 'var(--color-error)' }}>
+                          User Feedback / Flag Reports ({q.flags.length}):
+                        </h5>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                          {q.flags.map((flag, idx) => (
+                            <div key={idx} style={{ 
+                              display: 'flex', 
+                              gap: '0.75rem', 
+                              padding: '0.75rem', 
+                              backgroundColor: 'rgba(239, 68, 68, 0.05)', 
+                              border: '1px solid rgba(239, 68, 68, 0.15)', 
+                              borderRadius: 'var(--radius-sm)',
+                              fontSize: '0.85rem'
+                            }}>
+                              <div style={{ color: 'var(--color-error)', flexShrink: 0, marginTop: '2px' }}>
+                                <Flag size={14} fill="currentColor" />
+                              </div>
+                              <div style={{ flexGrow: 1, wordBreak: 'break-word', color: 'var(--color-text)' }}>{flag}</div>
                             </div>
-                            <div style={{ flexGrow: 1, wordBreak: 'break-word', color: 'var(--color-text)' }}>{flag}</div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
           )}

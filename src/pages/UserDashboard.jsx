@@ -3,7 +3,7 @@ import QuestionCard from '../components/QuestionCard';
 import { db } from '../services/db';
 import { Trophy, Activity, Edit3, Target, CheckCircle, BarChart3, AlertCircle, HelpCircle, X, Settings } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, LabelList } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer, LineChart, Line, LabelList } from 'recharts';
 
 export default function UserDashboard({ currentUser, questions, updateQuestions }) {
   const { updateAlias } = useAuth();
