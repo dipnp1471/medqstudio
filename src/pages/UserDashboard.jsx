@@ -3,7 +3,7 @@ import QuestionCard from '../components/QuestionCard';
 import { db } from '../services/db';
 import { Trophy, Activity, Edit3, Target, CheckCircle, BarChart3, AlertCircle, HelpCircle, X, Settings } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line, LabelList } from 'recharts';
 
 export default function UserDashboard({ currentUser, questions, updateQuestions }) {
   const { updateAlias } = useAuth();
@@ -396,10 +396,13 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
                       <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} horizontal={false} />
                       <XAxis dataKey="name" tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} angle={-45} textAnchor="end" height={60} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} tickFormatter={(val) => `${val}%`} axisLine={false} tickLine={false} />
-                      <Tooltip cursor={{ fill: 'transparent' }} contentStyle={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }} itemStyle={{ fontWeight: 'bold' }} />
                       <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', opacity: 0.8 }} />
-                      <Bar dataKey="You" fill="var(--color-brand-secondary)" radius={[4, 4, 0, 0]} barSize={20} isAnimationActive={false} />
-                      <Bar dataKey="Global" fill="var(--color-border)" radius={[4, 4, 0, 0]} barSize={20} isAnimationActive={false} />
+                      <Bar dataKey="You" fill="var(--color-brand-secondary)" radius={[4, 4, 0, 0]} barSize={20} isAnimationActive={false}>
+                        <LabelList dataKey="You" position="top" fill="var(--color-brand-primary)" fontSize={11} formatter={(val) => `${val}%`} />
+                      </Bar>
+                      <Bar dataKey="Global" fill="var(--color-border)" radius={[4, 4, 0, 0]} barSize={20} isAnimationActive={false}>
+                        <LabelList dataKey="Global" position="top" fill="var(--color-text-muted)" fontSize={11} formatter={(val) => `${val}%`} />
+                      </Bar>
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -451,10 +454,13 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
                       <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} horizontal={false} />
                       <XAxis dataKey="date" tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fontSize: 12, fill: 'var(--color-text-muted)' }} allowDecimals={false} axisLine={false} tickLine={false} />
-                      <Tooltip cursor={false} contentStyle={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }} />
                       <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', opacity: 0.8 }} />
-                      <Line type="monotone" dataKey="Correct Answers" stroke="var(--color-success)" strokeWidth={2} dot={false} activeDot={{ r: 4 }} isAnimationActive={false} />
-                      <Line type="monotone" dataKey="Total Attempted" stroke="var(--color-text-muted)" strokeWidth={2} strokeDasharray="4 4" dot={false} activeDot={false} isAnimationActive={false} />
+                      <Line type="monotone" dataKey="Correct Answers" stroke="var(--color-success)" strokeWidth={2} dot={false} activeDot={false} isAnimationActive={false}>
+                        <LabelList dataKey="Correct Answers" position="top" fill="var(--color-success)" fontSize={11} />
+                      </Line>
+                      <Line type="monotone" dataKey="Total Attempted" stroke="var(--color-text-muted)" strokeWidth={2} strokeDasharray="4 4" dot={false} activeDot={false} isAnimationActive={false}>
+                        <LabelList dataKey="Total Attempted" position="bottom" fill="var(--color-text-muted)" fontSize={11} />
+                      </Line>
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
