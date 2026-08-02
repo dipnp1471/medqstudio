@@ -11,9 +11,10 @@ import AuthPage from './pages/AuthPage';
 import ResetPassword from './pages/ResetPassword';
 import { db } from './services/db';
 import { useAuth } from './context/AuthContext';
+import { questions as defaultQuestions } from './data/questions';
 
 export default function App() {
-  const { currentUser, dbUser, logout } = useAuth();
+  const { currentUser, dbUser, loading: authLoading, logout } = useAuth();
 
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'dark';
@@ -28,21 +29,37 @@ export default function App() {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
   };
 
-  const [questions, setQuestions] = useState([]);
-  const [loadingQuestions, setLoadingQuestions] = useState(true);
+  // Synchronously initialize with cached or built-in questions for instant 0ms load
+  const [questions, setQuestions] = useState(() => {
+    try {
+      const cached = localStorage.getItem('cached_questions');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch {
+      // Ignore cache parse errors
+    }
+    return defaultQuestions || [];
+  });
 
+  // Revalidate questions in background without blocking the UI
   useEffect(() => {
+    let isMounted = true;
     const loadQs = async () => {
       try {
         const loaded = await db.getQuestions();
-        setQuestions(loaded);
+        if (isMounted && loaded && loaded.length > 0) {
+          setQuestions(loaded);
+        }
       } catch (err) {
-        console.error("Failed to load questions from database", err);
-      } finally {
-        setLoadingQuestions(false);
+        console.error("Failed to load questions from database in background", err);
       }
     };
     loadQs();
+    return () => { isMounted = false; };
   }, []);
 
   const updateQuestions = async (newQuestions) => {
@@ -75,60 +92,65 @@ export default function App() {
 
       {/* Main Study Workspace */}
       <main className="main-content">
-        {loadingQuestions ? (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
-            <div className="text-center">
-              <div style={{ border: '3px solid var(--color-border)', borderTopColor: 'var(--color-brand-secondary)', borderRadius: '50%', width: '30px', height: '30px', animation: 'spin 1s linear infinite', margin: '0 auto 1rem auto' }}></div>
-              <p className="text-muted">Loading questions...</p>
-            </div>
-          </div>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Home questions={questions} />} />
-            <Route path="/how-it-works" element={<HowItWorks />} />
-            <Route path="/login" element={<AuthPage />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            
-            <Route 
-              path="/practice" 
-              element={
-                <FreePractice 
+        <Routes>
+          <Route path="/" element={<Home questions={questions} />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          
+          <Route 
+            path="/practice" 
+            element={
+              <FreePractice 
+                questions={questions} 
+                onFlagQuestion={handleFlagQuestion} 
+                currentUser={dbUser} 
+              />
+            } 
+          />
+          
+          <Route 
+            path="/dashboard" 
+            element={
+              authLoading ? (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
+                  <div className="text-center">
+                    <div style={{ border: '3px solid var(--color-border)', borderTopColor: 'var(--color-brand-secondary)', borderRadius: '50%', width: '30px', height: '30px', animation: 'spin 1s linear infinite', margin: '0 auto 1rem auto' }}></div>
+                    <p className="text-muted">Loading Dashboard...</p>
+                  </div>
+                </div>
+              ) : currentUser ? (
+                <UserDashboard 
+                  currentUser={dbUser || { email: currentUser.email, alias: currentUser.email?.split('@')[0], role: 'user' }} 
                   questions={questions} 
-                  onFlagQuestion={handleFlagQuestion} 
-                  currentUser={dbUser} 
+                  updateQuestions={updateQuestions} 
                 />
-              } 
-            />
-            
-            <Route 
-              path="/dashboard" 
-              element={
-                currentUser ? (
-                  <UserDashboard 
-                    currentUser={dbUser} // Passing dbUser so dashboard has access to alias, role, email
-                    questions={questions} 
-                    updateQuestions={updateQuestions} 
-                  />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              } 
-            />
-            
-            <Route 
-              path="/admin" 
-              element={
-                dbUser?.role === 'admin' ? (
-                  <AdminDashboard questions={questions} updateQuestions={updateQuestions} />
-                ) : (
-                  <Navigate to="/dashboard" replace />
-                )
-              } 
-            />
-            
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        )}
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            } 
+          />
+          
+          <Route 
+            path="/admin" 
+            element={
+              authLoading ? (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
+                  <div className="text-center">
+                    <div style={{ border: '3px solid var(--color-border)', borderTopColor: 'var(--color-brand-secondary)', borderRadius: '50%', width: '30px', height: '30px', animation: 'spin 1s linear infinite', margin: '0 auto 1rem auto' }}></div>
+                    <p className="text-muted">Verifying permissions...</p>
+                  </div>
+                </div>
+              ) : dbUser?.role === 'admin' ? (
+                <AdminDashboard questions={questions} updateQuestions={updateQuestions} />
+              ) : (
+                <Navigate to="/dashboard" replace />
+              )
+            } 
+          />
+          
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
 
       {/* Footer Details */}

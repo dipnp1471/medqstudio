@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import QuestionCard from '../components/QuestionCard';
 import { ArrowRight, RefreshCw, User, CheckCircle } from 'lucide-react';
 import { db } from '../services/db';
 
-export default function FreePractice({ questions, onFlagQuestion, currentUser }) {
+export default function FreePractice({ questions = [], onFlagQuestion, currentUser }) {
   const navigate = useNavigate();
 
   // Filters
@@ -13,10 +13,17 @@ export default function FreePractice({ questions, onFlagQuestion, currentUser })
   // Question Pool and State
   const [history, setHistory] = useState([]); // Track question IDs answered in this session
   const [currentQuestion, setCurrentQuestion] = useState(() => {
-    if (questions.length === 0) return null;
+    if (!questions || questions.length === 0) return null;
     const randomIndex = Math.floor(Math.random() * questions.length);
     return questions[randomIndex];
   });
+
+  useEffect(() => {
+    if (!currentQuestion && questions && questions.length > 0) {
+      const randomIndex = Math.floor(Math.random() * questions.length);
+      setCurrentQuestion(questions[randomIndex]);
+    }
+  }, [questions, currentQuestion]);
 
   // Scores
   const [stats, setStats] = useState({

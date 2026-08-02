@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { questions as defaultQuestions } from '../data/questions';
 
 // Helper to get current week number (weeks since epoch)
 export const getCurrentWeek = () => {
@@ -416,12 +417,37 @@ export const db = {
 
   // --- QUESTIONS ---
   getQuestions: async () => {
-    const { data, error } = await supabase
-      .from('questions')
-      .select('*')
-      .order('id', { ascending: true });
-    if (error) throw error;
-    return data;
+    try {
+      const { data, error } = await supabase
+        .from('questions')
+        .select('*')
+        .order('id', { ascending: true });
+      if (error) throw error;
+      if (data && data.length > 0) {
+        try {
+          localStorage.setItem('cached_questions', JSON.stringify(data));
+        } catch {
+          // Ignore quota errors
+        }
+        return data;
+      }
+    } catch (err) {
+      console.warn("Failed to fetch questions from Supabase, falling back to cache/defaults:", err);
+    }
+
+    try {
+      const cached = localStorage.getItem('cached_questions');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch {
+      // Ignore parse errors
+    }
+
+    return defaultQuestions;
   },
 
   addQuestion: async (newQuestion) => {
