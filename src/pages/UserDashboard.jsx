@@ -322,10 +322,19 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
         {/* STATS TAB */}
         {activeTab === 'stats' && (
           <div className="card animate-fade" style={{ padding: '2rem' }}>
-            <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '2rem' }}>
-              <BarChart3 size={24} style={{ color: 'var(--color-brand-secondary)' }} />
-              Performance Dashboard
-            </h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+              <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
+                <BarChart3 size={24} style={{ color: 'var(--color-brand-secondary)' }} />
+                Performance Dashboard
+              </h2>
+              <button 
+                className="btn btn-primary"
+                style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.75rem 1.5rem', fontSize: '1.05rem', fontWeight: 'bold' }}
+                onClick={() => setActiveTab('practice')}
+              >
+                <Target size={20} /> Start Practicing
+              </button>
+            </div>
             
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
               <div className="card" style={{ background: 'var(--color-brand-light)', border: '1px solid var(--color-border)', textAlign: 'center', padding: '1.5rem' }}>
@@ -345,7 +354,17 @@ export default function UserDashboard({ currentUser, questions, updateQuestions 
             <div style={{ marginBottom: '3rem' }}>
               <h3 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'var(--color-brand-primary)' }}>Topic Breakdown</h3>
               {(!stats?.topicStats || Object.keys(stats.topicStats).length === 0) ? (
-                 <p style={{ color: 'var(--color-text-muted)', fontStyle: 'italic' }}>Answer some questions to see your topic breakdown.</p>
+                 <div style={{ textAlign: 'center', padding: '3rem 1rem', backgroundColor: 'var(--color-bg)', borderRadius: 'var(--radius-md)', border: '1px dashed var(--color-border)' }}>
+                   <Target size={32} style={{ color: 'var(--color-brand-secondary)', margin: '0 auto 1rem auto' }} />
+                   <p style={{ color: 'var(--color-text-main)', fontWeight: '500', marginBottom: '1.5rem', fontSize: '1.1rem' }}>You haven't answered any questions yet!</p>
+                   <button 
+                     className="btn btn-primary"
+                     style={{ padding: '0.75rem 1.5rem', fontSize: '1rem' }}
+                     onClick={() => setActiveTab('practice')}
+                   >
+                     Go to Practice Area
+                   </button>
+                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   {Object.entries(stats.topicStats)
