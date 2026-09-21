@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="footer-links-col">
           <span className="footer-links-title">Resources</span>
           <Link to="/practice" className="footer-link">Free Random Practice</Link>
-          <Link to="/how-it-works" className="footer-link">The Ethos</Link>
+          <Link to="/how-it-works" className="footer-link">How to Use</Link>
         </div>
 
         {/* Support Column */}

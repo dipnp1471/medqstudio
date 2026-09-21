@@ -51,7 +51,7 @@ export default function Header({ theme, toggleTheme, currentUser, onLogout }) {
                 to="/how-it-works" 
                 className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
               >
-                How It Works
+                How to Use
               </NavLink>
             </li>
             {currentUser?.role === 'admin' && (
