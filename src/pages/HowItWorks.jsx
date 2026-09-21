@@ -7,7 +7,9 @@ import {
   Smartphone, 
   BookCheck, 
   BarChart3,
-  Layers
+  Layers,
+  Target,
+  Trophy
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -83,35 +85,44 @@ export default function HowItWorks() {
           </div>
         </div>
 
-        {/* Section 3: Compare Yourself to Other Candidates */}
+        {/* Section 3: Compare Yourself to Other Users */}
         <div className="card" style={{ background: 'linear-gradient(135deg, hsla(200, 96%, 45%, 0.05) 0%, hsla(150, 80%, 35%, 0.04) 100%)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
             <Users size={22} style={{ color: 'var(--color-brand-secondary)' }} />
-            <h2 style={{ margin: 0, fontSize: '1.25rem' }}>Compare Yourself to Other Candidates</h2>
+            <h2 style={{ margin: 0, fontSize: '1.25rem' }}>Compare Yourself to Other Users</h2>
           </div>
           <p style={{ margin: '0 0 1rem 0', color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>
-            Revising alone makes it hard to tell where you actually stand. Med Q Studios includes anonymous leaderboards and cohort accuracy stats so you can benchmark your progress.
+            Revising with Med Q Studios gives you a clear picture of where you stand:
           </p>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
             <div style={{ background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)', padding: '1rem' }}>
-              <strong style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.25rem', color: 'var(--color-brand-primary)' }}>Gauge Real Readiness</strong>
-              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
-                See how your accuracy compares directly to other doctors preparing for the same exam cycle.
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
+                <Users size={16} style={{ color: 'var(--color-brand-primary)' }} />
+                <strong style={{ fontSize: '0.9rem', color: 'var(--color-brand-primary)' }}>Compare to Other Users</strong>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>
+                See how your scores and question counts stack up against others revising for the same exams.
               </p>
             </div>
 
             <div style={{ background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)', padding: '1rem' }}>
-              <strong style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.25rem', color: 'var(--color-brand-primary)' }}>Stay Accountable</strong>
-              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
-                Weekly and monthly question counts give you that extra bit of motivation to keep your daily streak alive.
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
+                <Target size={16} style={{ color: 'var(--color-brand-primary)' }} />
+                <strong style={{ fontSize: '0.9rem', color: 'var(--color-brand-primary)' }}>See Your Weak Spots</strong>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>
+                Track your accuracy by specialty to instantly spot which areas you need to focus on next.
               </p>
             </div>
 
             <div style={{ background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)', padding: '1rem' }}>
-              <strong style={{ display: 'block', fontSize: '0.9rem', marginBottom: '0.25rem', color: 'var(--color-brand-primary)' }}>Find Your Weak Spots</strong>
-              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
-                If everyone misses a question, it's just hard. If only you miss it, you know exactly what to revise.
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.35rem' }}>
+                <Trophy size={16} style={{ color: 'var(--color-brand-primary)' }} />
+                <strong style={{ fontSize: '0.9rem', color: 'var(--color-brand-primary)' }}>Compete on the Leaderboard</strong>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>
+                Join the weekly leaderboards for friendly competition to keep your daily revision streak going.
               </p>
             </div>
           </div>
